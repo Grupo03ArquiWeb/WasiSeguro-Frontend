@@ -1,0 +1,5 @@
+mat-toolbar.bg-secondary {
+    --mat-toolbar-container-background-color: var(--color-secondary);
+    background-color: var(--color-secondary);
+  }
+  
