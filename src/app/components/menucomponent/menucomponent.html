@@ -1,0 +1,13 @@
+<div class="flex items-center justify-center">
+    <div class="container mt-4">
+        <mat-toolbar class="bg-secondary rounded-2xl">
+            <button matButton class="bg-red-500 text-white" [matMenuTriggerFor]="menuRol">
+                <mat-icon>security</mat-icon>Rol
+            </button>
+        </mat-toolbar>
+        <mat-menu #menuRol="matMenu">
+            <button mat-menu-item routerLink="/roles/crear"><mat-icon>add</mat-icon>Registrar</button>
+            <button mat-menu-item routerLink="/roles/listar"><mat-icon>list</mat-icon>Listar</button>
+        </mat-menu>
+    </div>
+</div>
