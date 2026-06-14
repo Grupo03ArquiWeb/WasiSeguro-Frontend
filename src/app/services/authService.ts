@@ -7,21 +7,19 @@ import { LoginRequest } from '../models/login-request';
 import { LoginResponse } from '../models/login-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private url = `${baseUrl}/login`;
 
   constructor(private http: HttpClient) {}
 
   login(data: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.url, data)
-      .pipe(
-        tap(response => {
-          localStorage.setItem('token', response.jwttoken);
-        })
-      );
+    return this.http.post<LoginResponse>(this.url, data).pipe(
+      tap((response) => {
+        localStorage.setItem('token', response.jwttoken);
+      }),
+    );
   }
 
   getToken(): string | null {

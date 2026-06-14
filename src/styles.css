@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "tailwindcss";
-
+@import 'tailwindcss';
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -13,5 +12,23 @@ body {
   --color-secondary: #49bac1;
 }
 
+h2 {
+  font-size: 30px;
+  line-height: calc(2.25 / 1.875);
+}
 
+app-homecomponent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+app-menucomponent {
+width: 100%;
+}
+app-rol-crear,
+app-rol-list {
+  display: flex;
+  justify-content: center;
+}

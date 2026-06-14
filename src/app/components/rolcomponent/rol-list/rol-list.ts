@@ -5,16 +5,17 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Rolservice } from '../../../services/rolservice';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-rol-list',
-  imports: [MatTableModule, MatIconModule, MatButtonModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, RouterLink, RouterOutlet],
   templateUrl: './rol-list.html',
   styleUrl: './rol-list.css',
 })
 export class RolList implements OnInit {
   dataSource: MatTableDataSource<Rol> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   constructor(private rS: Rolservice) {}
 
   ngOnInit(): void {

@@ -4,6 +4,8 @@ import { Rolcomponent } from './components/rolcomponent/rolcomponent';
 import { RolList } from './components/rolcomponent/rol-list/rol-list';
 import { Logincomponent } from './components/logincomponent/logincomponent';
 import { authGuard } from './guards/auth-guard';
+import { RolCrear } from './components/rolcomponent/rol-crear/rol-crear';
+import { RolActualizar } from './components/rolcomponent/rol-actualizar/rol-actualizar';
 
 export const routes: Routes = [
   {
@@ -18,11 +20,24 @@ export const routes: Routes = [
   {
     path: 'home',
     component: Homecomponent,
+    canActivate: [authGuard],
   },
   {
     path: 'roles',
-    component: Rolcomponent,
     canActivate: [authGuard],
-    children: [{ path: 'listar', component: RolList }],
+    component: Rolcomponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'listar',
+        pathMatch: 'full',
+      },
+      { path: 'crear', component: RolCrear },
+      {
+        path: 'actualizar/:id',
+        component: RolActualizar,
+      },
+      { path: 'listar', component: RolList },
+    ],
   },
 ];
