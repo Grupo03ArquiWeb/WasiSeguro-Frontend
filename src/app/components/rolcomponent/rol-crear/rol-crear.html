@@ -1,0 +1,48 @@
+<div class="px-3 w-full container">
+
+    <div class="pb-5">
+        <h2>Registrar Rol</h2>
+    </div>
+    <form class="flex flex-col gap-4 " [formGroup]="form" (ngSubmit)="aceptar()">
+        <mat-form-field class=" example-full-width">
+            <mat-label>Nombre:</mat-label>
+            <input matInput maxlength="20" formControlName="nombre">
+            @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched){
+            <mat-error>El nombre es obligatorio.</mat-error>
+            }
+
+            @if(form.get('nombre')?.hasError('maxlength')){
+            <mat-error>Máximo 20 caracteres.</mat-error>
+            }
+
+        </mat-form-field>
+         <mat-form-field class=" example-full-width">
+            <mat-label>Descripción:</mat-label>
+            <input matInput maxlength="50" formControlName="descripcion">
+            @if(form.get('descripcion')?.hasError('required') && form.get('descripcion')?.touched){
+            <mat-error>La descripción es obligatoria.</mat-error>
+            }
+
+            @if(form.get('descripcion')?.hasError('maxlength')){
+            <mat-error>Máximo 50 caracteres.</mat-error>
+            }
+
+        </mat-form-field>
+        <div class="flex flex-col gap-2">
+            <mat-radio-group aria-label="Selecciones un estado" formControlName="activo">
+                <mat-radio-button [value]="true">Activo</mat-radio-button>
+                <mat-radio-button [value]="false">Inactivo</mat-radio-button>
+            </mat-radio-group>
+            @if(form.get('activo')?.hasError('required') && form.get('activo')?.touched){
+            <div class="text-red-500 text-sm">
+                Debe seleccionar un estado.
+            </div>
+            }
+        </div>
+       
+        <div>
+            <button matButton="outlined" type="submit">Registrar</button>
+        </div>
+
+    </form>
+</div>

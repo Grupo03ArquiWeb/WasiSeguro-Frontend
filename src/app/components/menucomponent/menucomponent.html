@@ -1,6 +1,11 @@
-<div class="flex items-center justify-center">
-    <div class="container mt-4">
+<div class="flex items-center justify-center w-full">
+
+    <div class="container my-4">
+
         <mat-toolbar class="bg-secondary rounded-2xl">
+            <button matButton class="bg-green-500 text-white" routerLink="/home">
+                <mat-icon>home</mat-icon>Inicio
+            </button>
             <button matButton class="bg-red-500 text-white" [matMenuTriggerFor]="menuRol">
                 <mat-icon>security</mat-icon>Rol
             </button>
