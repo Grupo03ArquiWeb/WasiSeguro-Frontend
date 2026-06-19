@@ -1,48 +1,117 @@
+<div class="w-full max-w-5xl mx-auto px-6 py-8">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="mb-1 text-xl font-semibold text-accent">
+        Lista de roles
+      </h2>
 
-<div class="px-3 w-full container">
-  <h2>Lista de Roles</h2>
-  <div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
+      <p class="text-xs text-muted">
+        Gestiona los roles del sistema
+      </p>
+    </div>
+    <a routerLink="/roles/crear" class="flex items-center gap-1.5
+             px-4 py-2
+             bg-secondary hover:bg-secondary-dark
+             text-white text-sm font-medium
+             rounded-lg
+             transition-colors">
+      <mat-icon class="text-lg">add</mat-icon>
+      Registrar rol
+    </a>
+  </div>
+  <div class="overflow-hidden bg-white border border-border rounded-xl">
+    <table mat-table [dataSource]="dataSource" class="w-full">
       <ng-container matColumnDef="c1">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <th mat-header-cell *matHeaderCellDef class="table-header">
+          ID
+        </th>
+        <td mat-cell *matCellDef="let element" class="px-4 py-3
+                 text-sm text-muted
+                 border-b border-[#e1f5f6]">
+          {{ element.id }}
+        </td>
       </ng-container>
-
       <ng-container matColumnDef="c2">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        <th mat-header-cell *matHeaderCellDef class="table-header">
+          Nombre
+        </th>
+        <td mat-cell *matCellDef="let element" class="px-4 py-3
+                 text-sm font-medium text-accent
+                 border-b border-[#e1f5f6]">
+          {{ element.nombre }}
+        </td>
       </ng-container>
       <ng-container matColumnDef="c3">
-        <th mat-header-cell *matHeaderCellDef> Descripción </th>
-        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        <th mat-header-cell *matHeaderCellDef class="table-header">
+          Descripción
+        </th>
+        <td mat-cell *matCellDef="let element" class="px-4 py-3
+                 text-sm text-[#4a6e72]
+                 border-b border-[#e1f5f6]">
+          {{ element.descripcion }}
+        </td>
       </ng-container>
+
       <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef> Estado </th>
-        <td mat-cell *matCellDef="let element"> {{element.activo}} </td>
+        <th mat-header-cell *matHeaderCellDef class="table-header">
+          Estado
+        </th>
+        <td mat-cell *matCellDef="let element" class="px-4 py-3 border-b border-[#e1f5f6]">
+          @if(element.activo) {
+          <span class="px-2.5 py-1
+                     rounded-full
+                     bg-[#d4f0d8]
+                     text-[#2a6e38]
+                     text-xs font-medium">
+            Activo
+          </span>
+          }
+          @if(!element.activo) {
+          <span class="px-2.5 py-1
+                     rounded-full
+                     bg-[#fde8e8]
+                     text-[#7a2f2f]
+                     text-xs font-medium">
+            Inactivo
+          </span>
+          }
+
+        </td>
       </ng-container>
       <ng-container matColumnDef="c5">
-        <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-        <td mat-cell *matCellDef="let element">
-          <button class="bg-red-400" matButton="elevated" (click)="eliminarRol(element.id)">
-            <mat-icon> delete</mat-icon>
+        <th mat-header-cell *matHeaderCellDef class="px-4 py-3 bg-[#e1f5f6] border-b border-border"></th>
+        <td mat-cell *matCellDef="let element" class="px-2 py-3 border-b border-[#e1f5f6]">
+          <button (click)="eliminarRol(element.id)" title="Eliminar rol" class="w-8 h-8
+                   flex items-center justify-center
+                   rounded-lg
+                   bg-[#fde8e8]
+                   text-[#c0392b]
+                   hover:bg-[#f7c1c1]
+                   transition-colors">
+            <mat-icon class="text-lg">
+              delete_outline
+            </mat-icon>
           </button>
         </td>
       </ng-container>
-            <ng-container matColumnDef="c6">
-        <th mat-header-cell *matHeaderCellDef> Actualizar </th>
-        <td mat-cell *matCellDef="let element">
-          <button class="bg-cyan-400" matButton="elevated" [routerLink]="['/roles/actualizar', element.id]">
-            <mat-icon> edit</mat-icon>
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef class="px-4 py-3 bg-[#e1f5f6] border-b border-border"></th>
+        <td mat-cell *matCellDef="let element" class="px-2 py-3 border-b border-[#e1f5f6]">
+          <button [routerLink]="['/roles/actualizar', element.id]" title="Editar rol" class="w-8 h-8
+                   flex items-center justify-center
+                   rounded-lg
+                   bg-[#e1f5f6]
+                   text-secondary
+                   hover:bg-border
+                   transition-colors">
+            <mat-icon class="text-lg">
+              edit
+            </mat-icon>
           </button>
         </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="transition-colors hover:bg-primary/5"></tr>
     </table>
-
-
   </div>
-
 </div>

@@ -5,11 +5,11 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Rolservice } from '../../../services/rolservice';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-rol-list',
-  imports: [MatTableModule, MatIconModule, MatButtonModule, RouterLink, RouterOutlet],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, RouterLink],
   templateUrl: './rol-list.html',
   styleUrl: './rol-list.css',
 })

@@ -1,17 +1,141 @@
 <app-menucomponent></app-menucomponent>
-    <div class="px-3 w-full container flex flex-col">
-        <h1 class="text-3xl font-bold mb-4">Bienvenido a Wasiseguro</h1>
-        <p class="text-lg mb-10">Esta es la página de inicio de Wasiseguro, una aplicación de gestión de seguros. </p>
 
-        <h3 class="text-2xl font-bold mb-4">Integrantes del grupo:</h3>
-        <ul class="list-disc list-inside text-lg">
-            <li>Diego Bryan Carlos Huaman Valverde - U202126158</li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
-<router-outlet>
+<div class="w-full max-w-5xl mx-auto px-6 py-8">
 
-</router-outlet>
+  <div class="relative overflow-hidden mb-8 px-9 py-8 rounded-2xl
+           bg-linear-to-br from-secondary to-secondary-dark">
+
+    <div class="absolute -right-10 -top-10 w-40 h-40 rounded-full
+             bg-white/10"></div>
+
+    <div class="absolute right-10 -bottom-16 w-30 h-30 rounded-full
+             bg-white/5"></div>
+
+
+    <h1 class="mb-2 text-2xl font-semibold text-white">
+      Bienvenido a Wasiseguro
+    </h1>
+
+    <p class="max-w-xl text-sm leading-relaxed text-white/75">
+      Administra roles y configuraciones del sistema desde este panel
+      central.
+    </p>
+
+  </div>
+
+  <h3 class="mb-4 text-xs font-medium uppercase tracking-widest text-muted">
+    Acceso rápido
+  </h3>
+
+  <div class="grid gap-4 mb-10
+           grid-cols-[repeat(auto-fit,minmax(180px,1fr))]">
+
+    <a routerLink="/roles/listar" class="bg-white border border-border rounded-xl p-5
+             flex flex-col gap-3
+             hover:border-secondary
+             hover:shadow-lg
+             transition-all">
+
+      <div class="w-10 h-10 rounded-lg bg-secondary-light
+               flex items-center justify-center">
+        <mat-icon class="text-secondary text-xl">
+          security
+        </mat-icon>
+      </div>
+
+      <div>
+        <p class="m-0 text-sm font-medium text-accent">
+          Roles
+        </p>
+
+        <p class="m-0 text-xs text-muted">
+          Gestionar roles del sistema
+        </p>
+      </div>
+
+    </a>
+
+    <a routerLink="/roles/crear" class="bg-white border border-border rounded-xl p-5
+             flex flex-col gap-3
+             hover:border-secondary
+             hover:shadow-lg
+             transition-all">
+
+      <div class="w-10 h-10 rounded-lg bg-secondary-light
+               flex items-center justify-center">
+        <mat-icon class="text-secondary text-xl">
+          add_circle_outline
+        </mat-icon>
+      </div>
+
+      <div>
+        <p class="m-0 text-sm font-medium text-accent">
+          Nuevo rol
+        </p>
+
+        <p class="m-0 text-xs text-muted">
+          Registrar un nuevo rol
+        </p>
+      </div>
+
+    </a>
+
+  </div>
+
+  <div class="bg-white border border-border rounded-xl p-6">
+
+    <h3 class="mb-4 text-xs font-medium uppercase tracking-widest text-muted">
+      Integrantes del grupo
+    </h3>
+
+    <ul class="flex flex-col gap-2.5 p-0 m-0 list-none">
+      <li class="flex items-center gap-2.5 text-sm text-accent">
+        <div class="avatar-badge">
+          DH
+        </div>
+        <p>Diego Bryan Carlos Huaman Valverde —</p>
+        <span class="text-muted">
+          U202126158
+        </span>
+      </li>
+      <li class="flex items-center gap-2.5 text-sm text-accent">
+        <div class="avatar-badge">
+          LF
+        </div>
+        <p>Leone Valenzo Farfan —</p>
+        <span class="text-muted">
+          U20221C404
+        </span>
+      </li>
+      <li class="flex items-center gap-2.5 text-sm text-accent">
+        <div class="avatar-badge">
+          SH
+        </div>
+        <p>Sebastian Isaac Hilasaca Añamuro —</p>
+        <span class="text-muted">
+          U20231A216
+        </span>
+      </li>
+      <li class="flex items-center gap-2.5 text-sm text-accent">
+        <div class="avatar-badge">
+          AF
+        </div>
+        <p>Fabian Angelo Astulle Farfan —</p>
+        <span class="text-muted">
+          U20231E862
+        </span>
+      </li>
+      <li class="flex items-center gap-2.5 text-sm text-accent">
+        <div class="avatar-badge">
+          BL
+        </div>
+        <p>Braulio Joaquin Adriano Silva Linares —</p>
+        <span class="text-muted">
+          U202210380
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

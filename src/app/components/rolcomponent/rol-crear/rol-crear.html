@@ -1,48 +1,145 @@
-<div class="px-3 w-full container">
+<div class="w-full max-w-3xl mx-auto px-6 py-8">
 
-    <div class="pb-5">
-        <h2>Registrar Rol</h2>
-    </div>
-    <form class="flex flex-col gap-4 " [formGroup]="form" (ngSubmit)="aceptar()">
-        <mat-form-field class=" example-full-width">
-            <mat-label>Nombre:</mat-label>
-            <input matInput maxlength="20" formControlName="nombre">
-            @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched){
-            <mat-error>El nombre es obligatorio.</mat-error>
-            }
+    <div class="mb-6">
 
-            @if(form.get('nombre')?.hasError('maxlength')){
-            <mat-error>Máximo 20 caracteres.</mat-error>
-            }
+        <a routerLink="/roles/listar" class="inline-flex items-center gap-1
+             mb-3
+             text-xs text-muted
+             hover:text-secondary
+             transition-colors">
+            <mat-icon class="text-base">arrow_back</mat-icon>
+            Volver a la lista
+        </a>
 
-        </mat-form-field>
-         <mat-form-field class=" example-full-width">
-            <mat-label>Descripción:</mat-label>
-            <input matInput maxlength="50" formControlName="descripcion">
-            @if(form.get('descripcion')?.hasError('required') && form.get('descripcion')?.touched){
-            <mat-error>La descripción es obligatoria.</mat-error>
-            }
+        <div class="flex items-center gap-2.5">
 
-            @if(form.get('descripcion')?.hasError('maxlength')){
-            <mat-error>Máximo 50 caracteres.</mat-error>
-            }
-
-        </mat-form-field>
-        <div class="flex flex-col gap-2">
-            <mat-radio-group aria-label="Selecciones un estado" formControlName="activo">
-                <mat-radio-button [value]="true">Activo</mat-radio-button>
-                <mat-radio-button [value]="false">Inactivo</mat-radio-button>
-            </mat-radio-group>
-            @if(form.get('activo')?.hasError('required') && form.get('activo')?.touched){
-            <div class="text-red-500 text-sm">
-                Debe seleccionar un estado.
+            <div class="w-10 h-10
+               flex items-center justify-center
+               rounded-lg
+               bg-[#e1f5f6]">
+                <mat-icon class="text-xl text-secondary">
+                    security
+                </mat-icon>
             </div>
-            }
-        </div>
-       
-        <div>
-            <button matButton="outlined" type="submit">Registrar</button>
+
+            <div>
+                <h2 class="text-lg font-semibold text-accent">
+                    Registrar rol
+                </h2>
+
+                <p class="text-xs text-muted">
+                    Completa los campos para crear un nuevo rol
+                </p>
+            </div>
+
         </div>
 
-    </form>
+    </div>
+
+    <div class="bg-white border border-border rounded-2xl p-7">
+
+        <form [formGroup]="form" (ngSubmit)="aceptar()" class="flex flex-col gap-5">
+
+            <div>
+
+                <label class="form-label">
+                    Nombre del rol
+                </label>
+
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput maxlength="20" formControlName="nombre" placeholder="ej. ADMIN">
+
+                    @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
+                    <mat-error>El nombre es obligatorio.</mat-error>
+                    }
+
+                    @if(form.get('nombre')?.hasError('maxlength')) {
+                    <mat-error>Máximo 20 caracteres.</mat-error>
+                    }
+
+                </mat-form-field>
+
+            </div>
+
+            <div>
+
+                <label class="form-label">
+                    Descripción
+                </label>
+
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput maxlength="50" formControlName="descripcion" placeholder="Descripción del rol">
+
+                    @if(form.get('descripcion')?.hasError('required') && form.get('descripcion')?.touched) {
+                    <mat-error>La descripción es obligatoria.</mat-error>
+                    }
+
+                    @if(form.get('descripcion')?.hasError('maxlength')) {
+                    <mat-error>Máximo 50 caracteres.</mat-error>
+                    }
+
+                </mat-form-field>
+
+            </div>
+
+            <div>
+
+                <label class="form-label mb-2.5">
+                    Estado
+                </label>
+
+                <mat-radio-group formControlName="activo" class="flex gap-4">
+
+                    <mat-radio-button [value]="true" class="text-sm text-accent">
+                        Activo
+                    </mat-radio-button>
+
+                    <mat-radio-button [value]="false" class="text-sm text-accent">
+                        Inactivo
+                    </mat-radio-button>
+
+                </mat-radio-group>
+
+                @if(form.get('activo')?.hasError('required') && form.get('activo')?.touched) {
+                <p class="mt-1.5 text-sm text-[#c0392b]">
+                    Debe seleccionar un estado.
+                </p>
+                }
+
+            </div>
+
+            <div class="border-t border-[#e1f5f6]"></div>
+
+            <div class="flex justify-end gap-3">
+
+                <a routerLink="/roles/listar" class="px-5 py-2.5
+                 border border-border
+                 rounded-lg
+                 text-sm font-medium text-muted
+                 hover:bg-primary
+                 transition-colors">
+                    Cancelar
+                </a>
+
+                <button type="submit" class="flex items-center gap-1.5
+                 px-6 py-2.5
+                 rounded-lg
+                 bg-secondary
+                 hover:bg-secondary-dark
+                 text-white
+                 text-sm font-medium
+                 transition-colors">
+                    <mat-icon class="text-lg">
+                        save
+                    </mat-icon>
+
+                    Registrar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>

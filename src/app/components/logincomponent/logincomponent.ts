@@ -2,19 +2,21 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/authService';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-logincomponent',
-  imports: [FormsModule],
+  imports: [FormsModule, MatIconModule],
   templateUrl: './logincomponent.html',
   styleUrl: './logincomponent.css',
 })
 export class Logincomponent {
-  email = "";
-  password = "";
+  email = '';
+  password = '';
 
   loading = false;
-  error = "";
+  error = '';
 
   constructor(
     private authService: AuthService,
@@ -23,7 +25,7 @@ export class Logincomponent {
 
   login() {
     this.loading = true;
-    this.error = "";
+    this.error = '';
 
     this.authService
       .login({
@@ -36,8 +38,15 @@ export class Logincomponent {
 
           this.router.navigate(['/home']);
         },
-        error: () => {
-          this.error = 'Correo o contraseña incorrectos';
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            this.error = 'Correo o contraseña incorrectos';
+          } else if (err.status === 0) {
+            this.error = 'No se pudo conectar con el servidor';
+          } else {
+            this.error = 'Ocurrió un error inesperado';
+          }
+
           this.loading = false;
         },
         complete: () => {
