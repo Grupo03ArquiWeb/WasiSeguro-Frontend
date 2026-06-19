@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Rol } from '../../../models/Rol';
 import { Rolservice } from '../../../services/rolservice';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-rol-crear',
@@ -17,7 +18,7 @@ import { Rolservice } from '../../../services/rolservice';
     MatRadioModule,
     MatSelectModule,
     MatButtonModule,
-    ReactiveFormsModule,],
+    ReactiveFormsModule, MatIconModule, RouterLink],
       providers: [provideNativeDateAdapter()],
   templateUrl: './rol-crear.html',
   styleUrl: './rol-crear.css',
