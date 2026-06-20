@@ -6,6 +6,7 @@ import { Logincomponent } from './components/logincomponent/logincomponent';
 import { authGuard } from './guards/auth-guard';
 import { RolCrear } from './components/rolcomponent/rol-crear/rol-crear';
 import { RolActualizar } from './components/rolcomponent/rol-actualizar/rol-actualizar';
+import { VozComponent } from './components/voz/voz';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,10 @@ export const routes: Routes = [
         component: RolActualizar,
       },
       { path: 'listar', component: RolList },
+      {
+        path: 'voz',
+        component: VozComponent
+      }
     ],
   },
 ];

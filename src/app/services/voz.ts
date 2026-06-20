@@ -13,7 +13,7 @@ export interface VozResponse {
 })
 export class VozService {
 
-  private apiUrl = 'http://localhost:8083/api/voz/comando';
+  private apiUrl = 'http://localhost:8080/api/voz/comando';
 
   // Temporalmente usamos mock porque el backend todavía no levanta.
   private usarMock = true;
