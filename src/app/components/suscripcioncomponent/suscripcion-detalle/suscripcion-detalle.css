@@ -1,0 +1,15 @@
+.detalle-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.detalle-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 16px;
+}
+
+mat-card-content p {
+  margin: 10px 0;
+}

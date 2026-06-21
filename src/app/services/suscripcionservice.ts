@@ -18,6 +18,10 @@ export class Suscripcionservice {
     return this.http.get<Suscripcion[]>(`${this.url}/listar`);
   }
 
+  listId(id: number) {
+    return this.http.get<Suscripcion>(`${this.url}/${id}`);
+  }
+
   insert(s: SuscripcionCreateDTO) {
     return this.http.post(`${this.url}/registrar`, s);
   }
