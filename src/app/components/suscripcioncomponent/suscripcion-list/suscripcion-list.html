@@ -1,0 +1,71 @@
+<div class="container" style="margin: 2%">
+  <div style="text-align: center;">
+    <h2>Lista de Suscripciones</h2>
+  </div>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Filtrar por estado</mat-label>
+    <input matInput (keyup)="faFiltrar($event)" placeholder="Escribe el estado..." />
+  </mat-form-field>
+
+  <div>
+    <table mat-table [dataSource]="faDataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="c1">
+        <th mat-header-cell *matHeaderCellDef>Usuario</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombreUsuario }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c2">
+        <th mat-header-cell *matHeaderCellDef>Plan</th>
+        <td mat-cell *matCellDef="let element">{{ element.planNombre }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c3">
+        <th mat-header-cell *matHeaderCellDef>Precio mensual</th>
+        <td mat-cell *matCellDef="let element">{{ element.precioMensual }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c4">
+        <th mat-header-cell *matHeaderCellDef>Fecha de inicio</th>
+        <td mat-cell *matCellDef="let element">{{ element.fechaInicio }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c5">
+        <th mat-header-cell *matHeaderCellDef>Fecha de fin</th>
+        <td mat-cell *matCellDef="let element">{{ element.fechaFin }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c7">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" [routerLink]="['/suscripcion/detalle', element.id]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+
+          <button mat-icon-button color="accent" [routerLink]="['/suscripcion/actualizar', element.id]">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="faEliminar(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="faDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: faDisplayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <div style="margin-top: 15px; text-align: left; font-weight: bold;">
+    Cantidad de suscripciones en la lista: {{ faDataSource.data.length }}
+  </div>
+</div>

@@ -8,6 +8,16 @@ import { RolCrear } from './components/rolcomponent/rol-crear/rol-crear';
 import { RolActualizar } from './components/rolcomponent/rol-actualizar/rol-actualizar';
 import { VozComponent } from './components/voz/voz';
 
+
+
+//imports de suscripcion
+import { Suscripcioncomponent } from './components/suscripcioncomponent/suscripcioncomponent';
+import { SuscripcionList } from './components/suscripcioncomponent/suscripcion-list/suscripcion-list';
+import { SuscripcionCrear } from './components/suscripcioncomponent/suscripcion-crear/suscripcion-crear';
+import { SuscripcionActualizar } from './components/suscripcioncomponent/suscripcion-actualizar/suscripcion-actualizar';
+import { SuscripcionDetalle } from './components/suscripcioncomponent/suscripcion-detalle/suscripcion-detalle';
+
+
 export const routes: Routes = [
   {
     path: '',
@@ -43,6 +53,34 @@ export const routes: Routes = [
         path: 'voz',
         component: VozComponent
       }
+    ],
+  },
+  {
+    path: 'suscripcion',
+    canActivate: [authGuard],
+    component: Suscripcioncomponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'listar',
+        pathMatch: 'full',
+      },
+      {
+        path: 'crear',
+        component: SuscripcionCrear,
+      },
+      {
+        path: 'listar',
+        component: SuscripcionList,
+      },
+      {
+        path: 'actualizar/:id',
+        component: SuscripcionActualizar,
+      },
+      {
+        path: 'detalle/:id',
+        component: SuscripcionDetalle,
+      },
     ],
   },
 ];
