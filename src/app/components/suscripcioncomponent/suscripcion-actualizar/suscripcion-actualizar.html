@@ -1,1 +1,59 @@
-<p>suscripcion-actualizar works!</p>
+<div class="update-container">
+  <mat-card class="update-card">
+    <mat-card-header>
+      <mat-card-title>Actualizar Suscripción</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" class="update-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ID Usuario</mat-label>
+          <input matInput formControlName="idUsuario" />
+          @if (form.get('idUsuario')?.touched && form.get('idUsuario')?.hasError('required')) {
+            <mat-error>El ID de usuario es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ID Plan</mat-label>
+          <input matInput type="number" formControlName="idPlan" />
+          @if (form.get('idPlan')?.touched && form.get('idPlan')?.hasError('required')) {
+            <mat-error>El ID del plan es obligatorio.</mat-error>
+          }
+          @if (form.get('idPlan')?.touched && form.get('idPlan')?.hasError('min')) {
+            <mat-error>El ID del plan debe ser mayor a 0.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha de inicio</mat-label>
+          <input matInput type="date" formControlName="fechaInicio" />
+          @if (form.get('fechaInicio')?.touched && form.get('fechaInicio')?.hasError('required')) {
+            <mat-error>La fecha de inicio es obligatoria.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha de fin</mat-label>
+          <input matInput type="date" formControlName="fechaFin" />
+          @if (form.get('fechaFin')?.touched && form.get('fechaFin')?.hasError('required')) {
+            <mat-error>La fecha de fin es obligatoria.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="estado" />
+          @if (form.get('estado')?.touched && form.get('estado')?.hasError('required')) {
+            <mat-error>El estado es obligatorio.</mat-error>
+          }
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="aceptar()">Guardar cambios</button>
+      <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
