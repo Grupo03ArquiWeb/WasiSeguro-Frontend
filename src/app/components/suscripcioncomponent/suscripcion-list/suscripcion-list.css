@@ -1,0 +1,13 @@
+table {
+  width: 100%;
+}
+
+th.mat-mdc-header-cell {
+  text-align: left;
+  font-weight: bold;
+  color: #51a0ad;
+}
+
+mat-form-field {
+  margin-bottom: 15px;
+}
