@@ -2,21 +2,19 @@ import { Routes } from '@angular/router';
 import { Homecomponent } from './components/homecomponent/homecomponent';
 import { Rolcomponent } from './components/rolcomponent/rolcomponent';
 import { RolList } from './components/rolcomponent/rol-list/rol-list';
+import { MapaComponent } from './components/mapa/mapa';
 import { Logincomponent } from './components/logincomponent/logincomponent';
 import { authGuard } from './guards/auth-guard';
 import { RolCrear } from './components/rolcomponent/rol-crear/rol-crear';
 import { RolActualizar } from './components/rolcomponent/rol-actualizar/rol-actualizar';
 import { VozComponent } from './components/voz/voz';
 
-
-
-//imports de suscripcion
+// imports de suscripcion
 import { Suscripcioncomponent } from './components/suscripcioncomponent/suscripcioncomponent';
 import { SuscripcionList } from './components/suscripcioncomponent/suscripcion-list/suscripcion-list';
 import { SuscripcionCrear } from './components/suscripcioncomponent/suscripcion-crear/suscripcion-crear';
 import { SuscripcionActualizar } from './components/suscripcioncomponent/suscripcion-actualizar/suscripcion-actualizar';
 import { SuscripcionDetalle } from './components/suscripcioncomponent/suscripcion-detalle/suscripcion-detalle';
-
 
 export const routes: Routes = [
   {
@@ -54,6 +52,10 @@ export const routes: Routes = [
         component: VozComponent
       }
     ],
+  },
+  {
+    path: 'mapa', 
+    component: MapaComponent,
   },
   {
     path: 'suscripcion',
