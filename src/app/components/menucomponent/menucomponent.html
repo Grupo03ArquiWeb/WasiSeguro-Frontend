@@ -1,13 +1,47 @@
-<div class="flex items-center justify-center">
-    <div class="container mt-4">
-        <mat-toolbar class="bg-secondary rounded-2xl">
-            <button matButton class="bg-red-500 text-white" [matMenuTriggerFor]="menuRol">
-                <mat-icon>security</mat-icon>Rol
-            </button>
-        </mat-toolbar>
-        <mat-menu #menuRol="matMenu">
-            <button mat-menu-item routerLink="/roles/crear"><mat-icon>add</mat-icon>Registrar</button>
-            <button mat-menu-item routerLink="/roles/listar"><mat-icon>list</mat-icon>Listar</button>
-        </mat-menu>
+<mat-toolbar class="ws-toolbar">
+
+  <a class="ws-brand" routerLink="/home">
+    <div class="ws-brand-icon">
+      <mat-icon class="text-white text-lg">shield</mat-icon>
     </div>
-</div>
+    Wasiseguro
+  </a>
+
+  <button matButton class="ws-nav-btn" routerLink="/home">
+    <mat-icon>home</mat-icon>Inicio
+  </button>
+
+  <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuRol">
+    <mat-icon>security</mat-icon>Roles
+  </button>
+
+  <!-- menú de suscripción -->
+  <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuSuscripcion">
+    <mat-icon>assignment</mat-icon>Suscripciones
+  </button>
+  <!-- menú de suscripción -->
+
+  <span class="ws-spacer"></span>
+
+</mat-toolbar>
+
+<mat-menu #menuRol="matMenu">
+  <button mat-menu-item routerLink="/roles/crear">
+    <mat-icon>add_circle_outline</mat-icon>Registrar rol
+  </button>
+  <button mat-menu-item routerLink="/roles/listar">
+    <mat-icon>list</mat-icon>Listar roles
+  </button>
+</mat-menu>
+
+  <!-- menú de suscripción -->
+<mat-menu #menuSuscripcion="matMenu">
+  <button mat-menu-item routerLink="/suscripcion/crear">
+    <mat-icon>add_circle_outline</mat-icon>Registrar suscripción
+  </button>
+
+  <button mat-menu-item routerLink="/suscripcion/listar">
+    <mat-icon>list_alt</mat-icon>Listar suscripciones
+  </button>
+</mat-menu>
+  <!-- menú de suscripción -->

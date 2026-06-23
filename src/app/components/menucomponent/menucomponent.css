@@ -1,5 +1,75 @@
-mat-toolbar.bg-secondary {
-    --mat-toolbar-container-background-color: var(--color-secondary);
-    background-color: var(--color-secondary);
-  }
-  
+mat-toolbar.ws-toolbar {
+  --mat-toolbar-container-background-color: #3db8bf;
+  background-color: #3db8bf !important;
+  border-radius: 0;
+  padding: 0 1.5rem;
+  height: 56px;
+  box-shadow: 0 2px 8px rgba(61, 184, 191, 0.25);
+}
+
+.ws-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-right: 1.5rem;
+}
+
+.ws-brand-icon {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ws-nav-btn {
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  padding: 0 0.75rem !important;
+  min-width: 0 !important;
+  transition: background 0.2s ease !important;
+}
+
+.ws-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+
+.ws-nav-btn mat-icon {
+  font-size: 18px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.ws-spacer {
+  flex: 1;
+}
+
+.mat-mdc-menu-panel {
+  border-radius: 10px !important;
+  border: 0.5px solid #b2e0e3 !important;
+  box-shadow: 0 4px 16px rgba(61, 184, 191, 0.15) !important;
+  min-width: 160px !important;
+}
+
+.mat-mdc-menu-item {
+  font-size: 0.875rem !important;
+  color: #1a3a3c !important;
+}
+
+.mat-mdc-menu-item:hover {
+  background: #e1f5f6 !important;
+  color: #3db8bf !important;
+}
+
+.mat-mdc-menu-item mat-icon {
+  color: #3db8bf !important;
+  font-size: 18px !important;
+}

@@ -1,0 +1,31 @@
+<div class="detalle-container">
+  @if (suscripcion) {
+    <mat-card class="detalle-card">
+      <mat-card-header>
+        <mat-card-title>Detalle de Suscripción</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>ID:</strong> {{ suscripcion.id }}</p>
+        <p><strong>ID Usuario:</strong> {{ suscripcion.idUsuario }}</p>
+        <p><strong>Nombre del usuario:</strong> {{ suscripcion.nombreUsuario }}</p>
+        <p><strong>ID Plan:</strong> {{ suscripcion.idPlan }}</p>
+        <p><strong>Nombre del plan:</strong> {{ suscripcion.planNombre }}</p>
+        <p><strong>Precio mensual:</strong> {{ suscripcion.precioMensual }}</p>
+        <p><strong>Fecha de inicio:</strong> {{ suscripcion.fechaInicio }}</p>
+        <p><strong>Fecha de fin:</strong> {{ suscripcion.fechaFin }}</p>
+        <p><strong>Estado:</strong> {{ suscripcion.estado }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="volver()">Volver</button>
+      </mat-card-actions>
+    </mat-card>
+  } @else {
+    <mat-card class="detalle-card">
+      <mat-card-content>
+        <p>Cargando detalle de suscripción...</p>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

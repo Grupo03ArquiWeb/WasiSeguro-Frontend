@@ -1,0 +1,52 @@
+<div class="contenedor-voz">
+
+  <h2>Control por voz</h2>
+
+  <p class="descripcion">
+    Usa comandos de voz para interactuar con Wasi Seguro.
+  </p>
+
+  <div class="acciones">
+    <button type="button" (click)="iniciarEscucha()" [disabled]="escuchando">
+      {{ escuchando ? 'Escuchando...' : 'Hablar' }}
+    </button>
+
+    <button type="button" (click)="enviarComando()">
+      Enviar comando
+    </button>
+
+    <button type="button" (click)="limpiar()">
+      Limpiar
+    </button>
+  </div>
+
+  <div class="campo">
+    <label>Texto reconocido:</label>
+    <input type="text" [(ngModel)]="textoReconocido" placeholder="Ejemplo: buscar ruta segura">
+  </div>
+
+  <div class="error" *ngIf="mensajeError">
+    {{ mensajeError }}
+  </div>
+
+  <div class="respuesta" *ngIf="respuesta">
+    <h3>Respuesta de la API</h3>
+
+    <p><strong>Comando detectado:</strong> {{ respuesta.comandoDetectado }}</p>
+    <p><strong>Mensaje:</strong> {{ respuesta.mensaje }}</p>
+    <p><strong>Acción:</strong> {{ respuesta.accion }}</p>
+  </div>
+
+  <div class="comandos">
+    <h3>Comandos disponibles</h3>
+
+    <ul>
+      <li>Buscar ruta segura</li>
+      <li>Activar alerta</li>
+      <li>Compartir ubicación</li>
+      <li>Mostrar zonas de riesgo</li>
+      <li>Cancelar</li>
+    </ul>
+  </div>
+
+</div>
