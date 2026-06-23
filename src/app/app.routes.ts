@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Homecomponent } from './components/homecomponent/homecomponent';
 import { Rolcomponent } from './components/rolcomponent/rolcomponent';
 import { RolList } from './components/rolcomponent/rol-list/rol-list';
+import { MapaComponent } from './components/mapa/mapa';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
       //   component: MachineInsert,
       // },
     ],
+  },
+  {
+    path: 'mapa', 
+    component: MapaComponent,
   }
 
 ];
