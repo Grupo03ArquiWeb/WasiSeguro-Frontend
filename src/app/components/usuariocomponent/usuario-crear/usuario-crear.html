@@ -1,0 +1,144 @@
+<div class="w-full max-w-3xl mx-auto px-6 py-8">
+    <div class="mb-6">
+        <a routerLink="/usuario/listar" class="inline-flex items-center gap-1
+             mb-3
+             text-xs text-muted
+             hover:text-secondary
+             transition-colors">
+            <mat-icon class="text-base">arrow_back</mat-icon>
+            Volver a la lista
+        </a>
+        <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10
+               flex items-center justify-center
+               rounded-lg
+               bg-secondary-light">
+                <mat-icon class="text-xl text-secondary">
+                    security
+                </mat-icon>
+            </div>
+            <div>
+                <h2 class="text-lg font-semibold text-accent">
+                    Registrar Usuario
+                </h2>
+                <p class="text-xs text-muted">
+                    Completa los campos para crear un nuevo Usuario
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white border border-border rounded-2xl p-7">
+        <form [formGroup]="form" (ngSubmit)="aceptar()" class="flex flex-col gap-5">
+            <div>
+                <mat-label class="form-label">
+                    Nombre
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput maxlength="100" formControlName="nombre">
+                    @if(form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
+                    <mat-error>El nombre es obligatorio.</mat-error>
+                    }
+                    @if(form.get('nombre')?.hasError('maxlength')) {
+                    <mat-error>Máximo 100 caracteres.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="form-label">
+                    Apellido
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput maxlength="100" formControlName="apellido">
+                    @if(form.get('apellido')?.hasError('required') && form.get('apellido')?.touched) {
+                    <mat-error>El Apellido es obligatorio.</mat-error>
+                    }
+                    @if(form.get('apellido')?.hasError('maxlength')) {
+                    <mat-error>Máximo 100 caracteres.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="form-label">
+                    Correo Electronico
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput maxlength="254" formControlName="email">
+                    @if(form.get('email')?.hasError('email')) {
+                    <mat-error>Correo electrónico inválido.</mat-error>
+                    }
+                    @if(form.get('email')?.hasError('required') && form.get('email')?.touched) {
+                    <mat-error>Máximo 254 caracteres.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="form-label">
+                    Telefono
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input type="tel" matInput maxlength="20" formControlName="telefono">
+                    @if(form.get('telefono')?.hasError('required') && form.get('telefono')?.touched) {
+                    <mat-error>El telefono es obligatorio.</mat-error>
+                    }
+                    @if(form.get('telefono')?.hasError('maxlength')) {
+                    <mat-error>Máximo 20 caracteres.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="form-label">
+                    Contraseña
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input type="password" matInput formControlName="password">
+                    @if(form.get('password')?.hasError('required') && form.get('password')?.touched) {
+                    <mat-error>La contraseña es obligatorio.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label class="form-label mb-2.5">
+                        Escoge el Rol
+                    </mat-label>
+                    <mat-select formControlName="idRol">
+                        @for (r of roles; track r.value) {
+                        <mat-option [value]="r.value">
+                            {{ r.viewValue }}
+                        </mat-option>
+                        }
+                    </mat-select>
+                    @if (form.get('idRol')?.hasError('required')) {
+                    <mat-error>El campo rol es obligatorio.</mat-error>
+
+                    }
+                </mat-form-field>
+            </div>
+            <div class="border-t border-secondary-light"></div>
+            <div class="flex justify-end gap-3">
+
+                <a routerLink="/usuario/listar" class="px-5 py-2.5
+                 border border-border
+                 rounded-lg
+                 text-sm font-medium text-muted
+                 hover:bg-primary
+                 transition-colors">
+                    Cancelar
+                </a>
+                <button type="submit" class="flex items-center gap-1.5
+                 px-6 py-2.5
+                 rounded-lg
+                 bg-secondary
+                 hover:bg-secondary-dark
+                 text-white
+                 text-sm font-medium
+                 transition-colors">
+                    <mat-icon class="text-lg">
+                        save
+                    </mat-icon>
+                    Registrar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

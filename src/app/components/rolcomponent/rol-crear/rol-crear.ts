@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Rol } from '../../../models/Rol';
 import { Rolservice } from '../../../services/rolservice';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-rol-crear',
@@ -18,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatRadioModule,
     MatSelectModule,
     MatButtonModule,
-    ReactiveFormsModule, MatIconModule, RouterLink],
+    ReactiveFormsModule, MatIconModule, RouterLink, MatFormFieldModule],
       providers: [provideNativeDateAdapter()],
   templateUrl: './rol-crear.html',
   styleUrl: './rol-crear.css',
@@ -26,11 +27,6 @@ import { MatIconModule } from '@angular/material/icon';
 export class RolCrear implements OnInit {
  form: FormGroup = new FormGroup({});
   rol: Rol = new Rol();
-  tipos: { value: string; viewValue: string }[] = [
-    { value: 'ADMIN', viewValue: 'ADMIN' },
-    { value: 'MODERADOR', viewValue: 'MODERADOR' },
-    { value: 'USER', viewValue: 'USER' },
-  ];
 
   constructor(
     private rS: Rolservice,

@@ -15,6 +15,9 @@ import { SuscripcionList } from './components/suscripcioncomponent/suscripcion-l
 import { SuscripcionCrear } from './components/suscripcioncomponent/suscripcion-crear/suscripcion-crear';
 import { SuscripcionActualizar } from './components/suscripcioncomponent/suscripcion-actualizar/suscripcion-actualizar';
 import { SuscripcionDetalle } from './components/suscripcioncomponent/suscripcion-detalle/suscripcion-detalle';
+import { UsuarioList } from './components/usuariocomponent/usuario-list/usuario-list';
+import { UsuarioActualizar } from './components/usuariocomponent/usuario-actualizar/usuario-actualizar';
+import { UsuarioCrear } from './components/usuariocomponent/usuario-crear/usuario-crear';
 
 import { Plansuscripcioncomponent } from './components/plansuscripcioncomponent/plansuscripcioncomponent';
 import { PlansuscripcionCrear } from './components/plansuscripcioncomponent/plansuscripcion-crear/plansuscripcion-crear';
@@ -35,6 +38,25 @@ export const routes: Routes = [
     path: 'home',
     component: Homecomponent,
     canActivate: [authGuard],
+  },
+  {
+    path: 'usuario',
+    canActivate: [authGuard],
+    component: Rolcomponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'listar',
+        pathMatch: 'full',
+      },
+      { path: 'crear', component: UsuarioCrear },
+      {
+        path: 'actualizar/:id',
+        component: UsuarioActualizar,
+      },
+      { path: 'listar', component: UsuarioList },
+
+    ],
   },
   {
     path: 'roles',

@@ -14,15 +14,15 @@ export class Rolservice {
     return this.http.get<Rol[]>(`${this.url}/listar`);
   }
   insert(m: Rol) {
-    return this.http.post(`${this.url}/crear`, m);
-  }
-  delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+    return this.http.post<Rol>(`${this.url}/crear`, m);
   }
   listId(id: number) {
     return this.http.get<Rol>(`${this.url}/${id}`);
   }
   update(m: Rol) {
-    return this.http.put(`${this.url}/actualizar`, m);
+    return this.http.put(`${this.url}/actualizar/${m.id}`, m, { responseType: 'text' });
+  }
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }
