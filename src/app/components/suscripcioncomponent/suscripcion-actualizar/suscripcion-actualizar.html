@@ -8,20 +8,23 @@
       <form [formGroup]="form" class="update-form">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>ID Usuario</mat-label>
-          <input matInput formControlName="idUsuario" />
+          <input matInput formControlName="idUsuario" readonly />
           @if (form.get('idUsuario')?.touched && form.get('idUsuario')?.hasError('required')) {
             <mat-error>El ID de usuario es obligatorio.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>ID Plan</mat-label>
-          <input matInput type="number" formControlName="idPlan" />
+          <mat-label>Plan</mat-label>
+          <mat-select formControlName="idPlan">
+            @for (p of listaPlanes; track p.id) {
+              <mat-option [value]="p.id">
+                {{ p.nombre }}
+              </mat-option>
+            }
+          </mat-select>
           @if (form.get('idPlan')?.touched && form.get('idPlan')?.hasError('required')) {
-            <mat-error>El ID del plan es obligatorio.</mat-error>
-          }
-          @if (form.get('idPlan')?.touched && form.get('idPlan')?.hasError('min')) {
-            <mat-error>El ID del plan debe ser mayor a 0.</mat-error>
+            <mat-error>El plan es obligatorio.</mat-error>
           }
         </mat-form-field>
 
@@ -39,13 +42,25 @@
           @if (form.get('fechaFin')?.touched && form.get('fechaFin')?.hasError('required')) {
             <mat-error>La fecha de fin es obligatoria.</mat-error>
           }
+          @if (form.hasError('fechaInvalida') && form.get('fechaFin')?.touched) {
+            <mat-error>La fecha de fin debe ser mayor o igual a la fecha de inicio.</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Estado</mat-label>
-          <input matInput formControlName="estado" />
+          <mat-select formControlName="estado">
+            @for (e of estados; track e.value) {
+              <mat-option [value]="e.value">
+                {{ e.viewValue }}
+              </mat-option>
+            }
+          </mat-select>
           @if (form.get('estado')?.touched && form.get('estado')?.hasError('required')) {
             <mat-error>El estado es obligatorio.</mat-error>
+          }
+          @if (form.get('estado')?.touched && form.get('estado')?.hasError('maxlength')) {
+            <mat-error>El estado no debe tener más de 30 caracteres.</mat-error>
           }
         </mat-form-field>
       </form>
