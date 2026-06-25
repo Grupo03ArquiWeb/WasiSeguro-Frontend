@@ -1,0 +1,69 @@
+<div class="container" style="margin: 2%">
+  <div style="text-align: center;">
+    <h2>Lista de planes de suscripción</h2>
+  </div>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Filtrar por estado</mat-label>
+    <mat-select (selectionChange)="filtrarEstado($event.value)">
+      @for (e of estadosFiltro; track e.value) {
+        <mat-option [value]="e.value">
+          {{ e.viewValue }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="precioMensual">
+        <th mat-header-cell *matHeaderCellDef>Precio mensual</th>
+        <td mat-cell *matCellDef="let element">{{ element.precioMensual }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="precioAnual">
+        <th mat-header-cell *matHeaderCellDef>Precio anual</th>
+        <td mat-cell *matCellDef="let element">{{ element.precioAnual }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="activo">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.activo ? 'Activo' : 'Inactivo' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="accent" [routerLink]="['/plansuscripcion/actualizar', element.id]">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="eliminar(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </div>
+
+    <div style="margin-top: 15px; text-align: left; font-weight: bold;">
+  Cantidad de planes en la lista: {{ dataSource.filteredData.length }}
+    </div>
+</div>

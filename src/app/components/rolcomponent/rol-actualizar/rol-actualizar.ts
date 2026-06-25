@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { Rol } from '../../../models/Rol';
 import { Rolservice } from '../../../services/rolservice';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-rol-actualizar',
@@ -19,6 +20,7 @@ import { Rolservice } from '../../../services/rolservice';
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    MatFormFieldModule
   ],
   templateUrl: './rol-actualizar.html',
   styleUrl: './rol-actualizar.css',
@@ -68,7 +70,7 @@ export class RolActualizar implements OnInit {
   init() {
     this.rS.listId(this.id).subscribe((data) => {
       this.form.patchValue({
-        id: data.id,
+        codigo: data.id,
         nombre: data.nombre,
         descripcion: data.descripcion,
         activo: data.activo,

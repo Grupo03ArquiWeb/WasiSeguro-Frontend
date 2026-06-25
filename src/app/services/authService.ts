@@ -33,4 +33,11 @@ export class AuthService {
   isLogged(): boolean {
     return !!this.getToken();
   }
+
+
+//facebook api
+loginConFacebookBackend(token: string) {
+    // Escribimos la URL base directamente para evitar que se mezcle con /login
+    return this.http.post<any>('http://localhost:8080/facebook', { token: token });
+  }
 }

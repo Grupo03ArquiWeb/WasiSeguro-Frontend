@@ -12,19 +12,27 @@
   </mat-form-field>
 
   <mat-form-field appearance="outline">
-    <mat-label>ID del plan</mat-label>
-    <input matInput type="number" formControlName="idPlan" />
+    <mat-label>Plan</mat-label>
+    <mat-select formControlName="idPlan">
+      @for (p of listaPlanes; track p.id) {
+        <mat-option [value]="p.id">
+          {{ p.nombre }}
+        </mat-option>
+      }
+    </mat-select>
     @if (form.get('idPlan')?.hasError('required') && form.get('idPlan')?.touched) {
-      <mat-error>El ID del plan es obligatorio</mat-error>
-    }
-    @if (form.get('idPlan')?.hasError('min') && form.get('idPlan')?.touched) {
-      <mat-error>El ID del plan debe ser mayor a 0</mat-error>
+      <mat-error>El plan es obligatorio</mat-error>
     }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de inicio</mat-label>
-    <input matInput [matDatepicker]="picker1" formControlName="fechaInicio" [min]="minDate" />
+    <input
+      matInput
+      [matDatepicker]="picker1"
+      formControlName="fechaInicio"
+      [min]="minDate"
+    />
     <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
     @if (form.get('fechaInicio')?.hasError('required') && form.get('fechaInicio')?.touched) {
@@ -34,23 +42,31 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de fin</mat-label>
-    <input matInput [matDatepicker]="picker2" formControlName="fechaFin" [min]="minDate" />
+    <input
+      matInput
+      [matDatepicker]="picker2"
+      formControlName="fechaFin"
+      [min]="form.get('fechaInicio')?.value || minDate"
+    />
     <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
     @if (form.get('fechaFin')?.hasError('required') && form.get('fechaFin')?.touched) {
       <mat-error>La fecha de fin es obligatoria</mat-error>
     }
+    @if (form.hasError('fechaInvalida') && form.get('fechaFin')?.touched) {
+      <mat-error>La fecha de fin debe ser mayor o igual a la fecha de inicio</mat-error>
+    }
   </mat-form-field>
-
-  @if (form.hasError('fechaInvalida') && form.get('fechaFin')?.touched) {
-    <div style="color: red; margin-bottom: 12px;">
-      La fecha de fin debe ser mayor o igual a la fecha de inicio
-    </div>
-  }
 
   <mat-form-field appearance="outline">
     <mat-label>Estado</mat-label>
-    <input matInput formControlName="estado" />
+    <mat-select formControlName="estado">
+      @for (e of estados; track e.value) {
+        <mat-option [value]="e.value">
+          {{ e.viewValue }}
+        </mat-option>
+      }
+    </mat-select>
     @if (form.get('estado')?.hasError('required') && form.get('estado')?.touched) {
       <mat-error>El estado es obligatorio</mat-error>
     }
