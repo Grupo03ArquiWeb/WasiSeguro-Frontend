@@ -20,8 +20,15 @@
     <mat-icon>assignment</mat-icon>Suscripciones
   </button>
   <!-- menú de suscripción -->
+   
+  <!-- menú de plan suscripción -->
+  <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuPlan">
+    <mat-icon>workspace_premium</mat-icon>Planes
+  </button>
+  <!-- menú de plan suscripción -->
 
   <span class="ws-spacer"></span>
+
 
 </mat-toolbar>
 
@@ -45,3 +52,13 @@
   </button>
 </mat-menu>
   <!-- menú de suscripción -->
+  <!-- menú de plan suscripción -->
+<mat-menu #menuPlan="matMenu">
+  <button mat-menu-item routerLink="/plansuscripcion/crear">
+    <mat-icon>add_circle_outline</mat-icon>Registrar plan
+  </button>
+  <button mat-menu-item routerLink="/plansuscripcion/listar">
+    <mat-icon>list</mat-icon>Listar planes
+  </button>
+</mat-menu>
+  <!-- menú de plan suscripción -->

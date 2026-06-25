@@ -16,6 +16,11 @@ import { SuscripcionCrear } from './components/suscripcioncomponent/suscripcion-
 import { SuscripcionActualizar } from './components/suscripcioncomponent/suscripcion-actualizar/suscripcion-actualizar';
 import { SuscripcionDetalle } from './components/suscripcioncomponent/suscripcion-detalle/suscripcion-detalle';
 
+import { Plansuscripcioncomponent } from './components/plansuscripcioncomponent/plansuscripcioncomponent';
+import { PlansuscripcionCrear } from './components/plansuscripcioncomponent/plansuscripcion-crear/plansuscripcion-crear';
+import { PlansuscripcionActualizar } from './components/plansuscripcioncomponent/plansuscripcion-actualizar/plansuscripcion-actualizar';
+import { PlansuscripcionList } from './components/plansuscripcioncomponent/plansuscripcion-list/plansuscripcion-list';
+
 export const routes: Routes = [
   {
     path: '',
@@ -85,4 +90,27 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'plansuscripcion',
+    canActivate: [authGuard],
+    component: Plansuscripcioncomponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'listar',
+        pathMatch: 'full',
+      },
+      { 
+        path: 'crear', 
+        component: PlansuscripcionCrear 
+      },
+      { path: 'actualizar/:id', 
+        component: PlansuscripcionActualizar 
+      },
+      { 
+        path: 'listar', 
+        component: PlansuscripcionList 
+      },
+    ],
+  },  
 ];

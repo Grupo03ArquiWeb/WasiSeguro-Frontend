@@ -1,0 +1,23 @@
+.update-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.update-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.full-width {
+  width: 100%;
+}
