@@ -11,6 +11,12 @@
     <mat-icon>home</mat-icon>Inicio
   </button>
 
+  <!-- menú de usuario -->
+   <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuUsuario">
+    <mat-icon> person</mat-icon>Usuarios
+  </button>
+   <!-- menú de usuario -->
+
   <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuRol">
     <mat-icon>security</mat-icon>Roles
   </button>
@@ -24,6 +30,18 @@
   <span class="ws-spacer"></span>
 
 </mat-toolbar>
+
+  <!-- menú de usuario -->
+<mat-menu #menuUsuario="matMenu">
+  <button mat-menu-item routerLink="/usuario/crear">
+    <mat-icon>add_circle_outline</mat-icon>Registrar usuario
+  </button>
+
+  <button mat-menu-item routerLink="/usuario/listar">
+    <mat-icon>list_alt</mat-icon>Listar usuarios
+  </button>
+</mat-menu>
+  <!-- menú de usuario -->
 
 <mat-menu #menuRol="matMenu">
   <button mat-menu-item routerLink="/roles/crear">
