@@ -1,0 +1,68 @@
+<form [formGroup]="form" (ngSubmit)="aceptar()" class="example-form">
+  <div style="text-align: center;">
+    <h2>Registrar plan de suscripción</h2>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" />
+    @if (form.get('nombre')?.hasError('required') && form.get('nombre')?.touched) {
+      <mat-error>El nombre es obligatorio</mat-error>
+    }
+    @if (form.get('nombre')?.hasError('maxlength') && form.get('nombre')?.touched) {
+      <mat-error>El nombre no debe tener más de 50 caracteres</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="descripcion"></textarea>
+    @if (form.get('descripcion')?.hasError('maxlength') && form.get('descripcion')?.touched) {
+      <mat-error>La descripción no debe tener más de 255 caracteres</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Beneficios</mat-label>
+    <textarea matInput formControlName="beneficios"></textarea>
+    @if (form.get('beneficios')?.hasError('maxlength') && form.get('beneficios')?.touched) {
+      <mat-error>Los beneficios no deben tener más de 500 caracteres</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Precio mensual</mat-label>
+    <input matInput type="number" formControlName="precioMensual" />
+    @if (form.get('precioMensual')?.hasError('required') && form.get('precioMensual')?.touched) {
+      <mat-error>El precio mensual es obligatorio</mat-error>
+    }
+    @if (form.get('precioMensual')?.hasError('min') && form.get('precioMensual')?.touched) {
+      <mat-error>El precio mensual debe ser mayor o igual a 0</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Precio anual</mat-label>
+    <input matInput type="number" formControlName="precioAnual" />
+    @if (form.get('precioAnual')?.hasError('required') && form.get('precioAnual')?.touched) {
+      <mat-error>El precio anual es obligatorio</mat-error>
+    }
+    @if (form.get('precioAnual')?.hasError('min') && form.get('precioAnual')?.touched) {
+      <mat-error>El precio anual debe ser mayor o igual a 0</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Estado</mat-label>
+    <mat-select formControlName="activo">
+      @for (e of estados; track e.value) {
+        <mat-option [value]="e.value">{{ e.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div style="display: flex; justify-content: center; gap: 12px; margin-top: 12px;">
+    <button mat-raised-button color="primary" type="submit">Registrar</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>
