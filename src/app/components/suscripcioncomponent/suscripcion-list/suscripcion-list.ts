@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 import { Suscripcion } from '../../../models/suscripcion';
 import { Suscripcionservice } from '../../../services/suscripcionservice';
@@ -18,19 +18,24 @@ import { Suscripcionservice } from '../../../services/suscripcionservice';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
     RouterModule,
+    MatSelectModule,
   ],
   templateUrl: './suscripcion-list.html',
   styleUrl: './suscripcion-list.css',
 })
 export class SuscripcionList implements OnInit {
   faDataSource: MatTableDataSource<Suscripcion> = new MatTableDataSource();
-
   faDisplayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+
+  estadosFiltro: { value: string; viewValue: string }[] = [
+    { value: '', viewValue: 'Todos' },
+    { value: 'activo', viewValue: 'Activo' },
+    { value: 'inactivo', viewValue: 'Inactivo' },
+  ];
 
   @ViewChild(MatPaginator) faPaginator!: MatPaginator;
 
@@ -44,7 +49,7 @@ export class SuscripcionList implements OnInit {
 
     this.faDataSource.filterPredicate = (data: Suscripcion, filter: string) => {
       const estado = data.estado ? data.estado.toLowerCase() : '';
-      return estado.includes(filter);
+      return filter === '' ? true : estado === filter;
     };
   }
 
@@ -63,9 +68,8 @@ export class SuscripcionList implements OnInit {
     });
   }
 
-  faFiltrar(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.faDataSource.filter = filterValue.trim().toLowerCase();
+  faFiltrarEstado(valor: string): void {
+    this.faDataSource.filter = valor.trim().toLowerCase();
 
     if (this.faDataSource.paginator) {
       this.faDataSource.paginator.firstPage();

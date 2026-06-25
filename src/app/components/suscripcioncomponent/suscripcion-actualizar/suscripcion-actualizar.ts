@@ -1,13 +1,23 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+
 import { Suscripcionservice } from '../../../services/suscripcionservice';
 import { SuscripcionCreateDTO } from '../../../models/suscripcionCreateDTO';
+import { PlanSuscripcion } from '../../../models/planSuscripcion';
+import { PlanSuscripcionservice } from '../../../services/planSuscripcionservice';
 
 @Component({
   selector: 'app-suscripcion-actualizar',
@@ -20,6 +30,7 @@ import { SuscripcionCreateDTO } from '../../../models/suscripcionCreateDTO';
     MatButtonModule,
     MatSnackBarModule,
     MatCardModule,
+    MatSelectModule,
   ],
   templateUrl: './suscripcion-actualizar.html',
   styleUrl: './suscripcion-actualizar.css',
@@ -27,22 +38,32 @@ import { SuscripcionCreateDTO } from '../../../models/suscripcionCreateDTO';
 export class SuscripcionActualizar implements OnInit {
   form: FormGroup;
   id: number = 0;
+  listaPlanes: PlanSuscripcion[] = [];
+
+  estados: { value: string; viewValue: string }[] = [
+    { value: 'activo', viewValue: 'Activo' },
+    { value: 'inactivo', viewValue: 'Inactivo' },
+  ];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private sS: Suscripcionservice,
+    private pS: PlanSuscripcionservice,
     private snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ) {
-    this.form = this.fb.group({
-      idUsuario: ['', Validators.required],
-      idPlan: [0, [Validators.required, Validators.min(1)]],
-      fechaInicio: ['', Validators.required],
-      fechaFin: ['', Validators.required],
-      estado: ['', Validators.required],
-    });
+    this.form = this.fb.group(
+      {
+        idUsuario: ['', Validators.required],
+        idPlan: ['', [Validators.required]],
+        fechaInicio: ['', Validators.required],
+        fechaFin: ['', Validators.required],
+        estado: ['', [Validators.required, Validators.maxLength(30)]],
+      },
+      { validators: this.fechasValidator }
+    );
   }
 
   ngOnInit(): void {
@@ -55,6 +76,15 @@ export class SuscripcionActualizar implements OnInit {
       this.router.navigate(['/suscripcion/listar']);
       return;
     }
+
+    this.pS.list().subscribe({
+      next: (data) => {
+        this.listaPlanes = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar planes:', err);
+      },
+    });
 
     this.sS.listId(this.id).subscribe({
       next: (data) => {
@@ -75,6 +105,18 @@ export class SuscripcionActualizar implements OnInit {
         this.router.navigate(['/suscripcion/listar']);
       },
     });
+  }
+
+  fechasValidator(control: AbstractControl) {
+    const valorFechaInicio = control.get('fechaInicio')?.value;
+    const valorFechaFin = control.get('fechaFin')?.value;
+
+    if (!valorFechaInicio || !valorFechaFin) return null;
+
+    const fechaInicio = new Date(valorFechaInicio);
+    const fechaFin = new Date(valorFechaFin);
+
+    return fechaFin >= fechaInicio ? null : { fechaInvalida: true };
   }
 
   aceptar(): void {
@@ -99,7 +141,7 @@ export class SuscripcionActualizar implements OnInit {
       },
       error: (err) => {
         console.error('Error al actualizar suscripción:', err);
-        this.snackBar.open('ID Plan de suscripcion no encontrado', 'Cerrar', {
+        this.snackBar.open('Error al actualizar la suscripción', 'Cerrar', {
           duration: 3000,
         });
       },
