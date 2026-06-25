@@ -63,7 +63,7 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
   </div>
 
-  <div style="margin-top: 15px; text-align: left; font-weight: bold;">
-    Cantidad de planes en la lista: {{ dataSource.data.length }}
-  </div>
+    <div style="margin-top: 15px; text-align: left; font-weight: bold;">
+  Cantidad de planes en la lista: {{ dataSource.filteredData.length }}
+    </div>
 </div>

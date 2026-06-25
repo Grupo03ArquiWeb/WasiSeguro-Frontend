@@ -56,17 +56,17 @@ export class SuscripcionCrear implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pS.list().subscribe({
-      next: (data) => {
-        this.listaPlanes = data;
-      },
+      this.pS.list().subscribe({
+    next: (data) => {
+      this.listaPlanes = data.filter((p) => p.activo === true);
+    },
       error: (err) => {
-        console.error('Error al cargar planes:', err);
-        this.snackBar.open('Error al cargar los planes', 'Cerrar', {
-          duration: 3000,
-        });
-      },
+    console.error('Error al cargar planes:', err);
+    this.snackBar.open('Error al cargar los planes', 'Cerrar', {
+      duration: 3000,
     });
+  },
+});
 
     this.form = this.formBuilder.group(
       {
