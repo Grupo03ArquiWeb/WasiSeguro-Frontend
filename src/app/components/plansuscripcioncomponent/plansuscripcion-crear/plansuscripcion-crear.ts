@@ -47,11 +47,11 @@ export class PlansuscripcionCrear implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.maxLength(50)]],
-      descripcion: ['', [Validators.maxLength(255)]],
-      beneficios: ['', [Validators.maxLength(500)]],
+      descripcion: ['', [Validators.required, Validators.maxLength(255)]],
+      beneficios: ['', [Validators.required, Validators.maxLength(500)]],
       precioMensual: ['', [Validators.required, Validators.min(0)]],
       precioAnual: ['', [Validators.required, Validators.min(0)]],
-      activo: [true, Validators.required],
+      activo: [null, Validators.required],
     });
   }
 
