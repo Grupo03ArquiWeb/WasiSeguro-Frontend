@@ -79,7 +79,7 @@ export class SuscripcionActualizar implements OnInit {
 
     this.pS.list().subscribe({
       next: (data) => {
-        this.listaPlanes = data;
+        this.listaPlanes = data.filter((p) => p.activo === true);
       },
       error: (err) => {
         console.error('Error al cargar planes:', err);
