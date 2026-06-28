@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Suscripcion } from '../models/suscripcion';
 import { SuscripcionCreateDTO } from '../models/suscripcionCreateDTO';
+import { SuscripcionEstadisticaEstado } from '../models/suscripcionEstadisticaEstado';
+import { SuscripcionEstadisticaPlan } from '../models/suscripcionEstadisticaPlan';
 
 const base_url = environment.base;
 
@@ -45,6 +47,18 @@ export class Suscripcionservice {
   filtrarPorFechas(fechaInicio: string, fechaFin: string) {
     return this.http.get<Suscripcion[]>(
       `${this.url}/filtrar/fechas?fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`
+    );
+  }
+
+  estadisticasPorEstado() {
+    return this.http.get<SuscripcionEstadisticaEstado[]>(
+      `${this.url}/estadisticas/estado`
+    );
+  }
+
+  estadisticasPorPlan() {
+    return this.http.get<SuscripcionEstadisticaPlan[]>(
+      `${this.url}/estadisticas/plan`
     );
   }
 }

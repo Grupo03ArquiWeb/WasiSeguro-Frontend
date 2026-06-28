@@ -34,6 +34,7 @@ import { PlanSuscripcion } from '../../../models/planSuscripcion';
 export class PlansuscripcionActualizar implements OnInit {
   form: FormGroup;
   id: number = 0;
+  planOriginal: PlanSuscripcion = new PlanSuscripcion();
 
   estados: { value: boolean; viewValue: string }[] = [
     { value: true, viewValue: 'Activo' },
@@ -71,6 +72,8 @@ export class PlansuscripcionActualizar implements OnInit {
 
     this.pS.listId(this.id).subscribe({
       next: (data) => {
+        this.planOriginal = data;
+
         this.form.patchValue({
           nombre: data.nombre,
           descripcion: data.descripcion,
@@ -79,6 +82,7 @@ export class PlansuscripcionActualizar implements OnInit {
           precioAnual: data.precioAnual,
           activo: data.activo,
         });
+
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -105,6 +109,9 @@ export class PlansuscripcionActualizar implements OnInit {
     modelo.precioMensual = Number(this.form.value.precioMensual);
     modelo.precioAnual = Number(this.form.value.precioAnual);
     modelo.activo = this.form.value.activo;
+    modelo.createdAt = this.planOriginal.createdAt;
+
+    console.log('plan a actualizar', modelo);
 
     this.pS.update(modelo).subscribe({
       next: () => {

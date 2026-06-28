@@ -1,0 +1,55 @@
+<div class="chart-container">
+  <h2 class="chart-title">Reporte de suscripciones por estado</h2>
+
+  <div class="chart-wrapper">
+    @if (hasDataEstado) {
+      <div class="chart-wrapper chart-pie">
+        <canvas
+          #chartEstado
+          baseChart
+          [datasets]="barChartDataEstado"
+          [labels]="barChartLabelsEstado"
+          [options]="barChartOptionsEstado"
+          [legend]="barChartLegendEstado"
+          [type]="barChartTypeEstado"
+        >
+        </canvas>
+      </div>
+    }
+
+    @if (!hasDataEstado) {
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="chart-container">
+  <h2 class="chart-title">Reporte de suscripciones por plan</h2>
+
+  <div class="chart-wrapper">
+    @if (hasDataPlan) {
+      <div class="chart-wrapper chart-bar">
+        <canvas
+          #chartPlan
+          baseChart
+          [datasets]="barChartDataPlan"
+          [labels]="barChartLabelsPlan"
+          [options]="barChartOptionsPlan"
+          [legend]="barChartLegendPlan"
+          [type]="barChartTypePlan"
+        >
+        </canvas>
+      </div>
+    }
+
+    @if (!hasDataPlan) {
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </div>
+</div>

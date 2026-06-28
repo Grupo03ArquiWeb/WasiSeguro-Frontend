@@ -18,6 +18,7 @@ import { SuscripcionDetalle } from './components/suscripcioncomponent/suscripcio
 import { UsuarioList } from './components/usuariocomponent/usuario-list/usuario-list';
 import { UsuarioActualizar } from './components/usuariocomponent/usuario-actualizar/usuario-actualizar';
 import { UsuarioCrear } from './components/usuariocomponent/usuario-crear/usuario-crear';
+import { SuscripcionReportes } from './components/suscripcioncomponent/suscripcion-reportes/suscripcion-reportes';
 
 import { Plansuscripcioncomponent } from './components/plansuscripcioncomponent/plansuscripcioncomponent';
 import { PlansuscripcionCrear } from './components/plansuscripcioncomponent/plansuscripcion-crear/plansuscripcion-crear';
@@ -110,6 +111,18 @@ export const routes: Routes = [
         path: 'detalle/:id',
         component: SuscripcionDetalle,
       },
+      {
+        path: 'reportes',
+        component: SuscripcionReportes,
+      },
+      {
+      path: 'actualizar/:id',
+      component: SuscripcionActualizar,
+      },
+      {
+      path: 'detalle/:id',
+      component: SuscripcionDetalle,
+      }
     ],
   },
   {
