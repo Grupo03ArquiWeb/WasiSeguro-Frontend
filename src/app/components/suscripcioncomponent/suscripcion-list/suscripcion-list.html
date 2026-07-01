@@ -3,7 +3,41 @@
     <h2>Lista de Suscripciones</h2>
   </div>
 
-  <mat-form-field style="width: 100%;">
+  <div class="filtros-fecha-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha inicio</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerInicio"
+        [value]="fechaInicioFiltro"
+        (dateChange)="faCapturarFechaInicio($event)"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha fin</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerFin"
+        [value]="fechaFinFiltro"
+        (dateChange)="faCapturarFechaFin($event)"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="faFiltrarPorFechas()">
+      Filtrar por fechas
+    </button>
+
+    <button mat-raised-button color="accent" (click)="faLimpiarFiltrosFechas()">
+      Limpiar fechas
+    </button>
+  </div>
+
+  <mat-form-field style="width: 100%;" appearance="outline">
     <mat-label>Filtrar por estado</mat-label>
     <mat-select (selectionChange)="faFiltrarEstado($event.value)">
       @for (e of estadosFiltro; track e.value) {
@@ -71,6 +105,6 @@
   </div>
 
   <div style="margin-top: 15px; text-align: left; font-weight: bold;">
-  Cantidad de suscripciones en la lista: {{ faDataSource.filteredData.length }}
+    Cantidad de suscripciones en la lista: {{ faDataSource.filteredData.length }}
   </div>
 </div>

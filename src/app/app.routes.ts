@@ -22,6 +22,7 @@ import { SuscripcionReportes } from './components/suscripcioncomponent/suscripci
 
 import { Plansuscripcioncomponent } from './components/plansuscripcioncomponent/plansuscripcioncomponent';
 import { PlansuscripcionCrear } from './components/plansuscripcioncomponent/plansuscripcion-crear/plansuscripcion-crear';
+import { PlansuscripcionDetalle } from './components/plansuscripcioncomponent/plansuscripcion-detalle/plansuscripcion-detalle';
 import { PlansuscripcionActualizar } from './components/plansuscripcioncomponent/plansuscripcion-actualizar/plansuscripcion-actualizar';
 import { PlansuscripcionList } from './components/plansuscripcioncomponent/plansuscripcion-list/plansuscripcion-list';
 
@@ -154,6 +155,10 @@ export const routes: Routes = [
         path: 'listar',
         component: PlansuscripcionList,
       },
+      {
+        path: 'detalle/:id',
+        component: PlansuscripcionDetalle
+      }
     ],
   },
 ];
