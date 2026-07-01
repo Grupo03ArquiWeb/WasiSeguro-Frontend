@@ -51,13 +51,18 @@ export const routes: Routes = [
         redirectTo: 'listar',
         pathMatch: 'full',
       },
-      { path: 'crear', component: UsuarioCrear },
+      {
+        path: 'crear',
+        component: UsuarioCrear,
+        data: { roles: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_MODERADOR'] },
+      },
+
       {
         path: 'actualizar/:id',
         component: UsuarioActualizar,
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
       },
-      { path: 'listar', component: UsuarioList },
-
+      { path: 'listar', component: UsuarioList, data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] } },
     ],
   },
   {
@@ -70,20 +75,25 @@ export const routes: Routes = [
         redirectTo: 'listar',
         pathMatch: 'full',
       },
-      { path: 'crear', component: RolCrear },
+      {
+        path: 'crear',
+        component: RolCrear,
+        data: { roles: ['ROLE_ADMIN'] },
+      },
       {
         path: 'actualizar/:id',
         component: RolActualizar,
+        data: { roles: ['ROLE_ADMIN'] },
       },
-      { path: 'listar', component: RolList },
-      {
-        path: 'voz',
-        component: VozComponent
-      }
+      { path: 'listar', component: RolList, data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] } },
     ],
   },
   {
-    path: 'mapa', 
+    path: 'voz',
+    component: VozComponent,
+  },
+  {
+    path: 'mapa',
     component: MapaComponent,
   },
   {
@@ -117,13 +127,13 @@ export const routes: Routes = [
         component: SuscripcionReportes,
       },
       {
-      path: 'actualizar/:id',
-      component: SuscripcionActualizar,
+        path: 'actualizar/:id',
+        component: SuscripcionActualizar,
       },
       {
-      path: 'detalle/:id',
-      component: SuscripcionDetalle,
-      }
+        path: 'detalle/:id',
+        component: SuscripcionDetalle,
+      },
     ],
   },
   {
@@ -136,21 +146,19 @@ export const routes: Routes = [
         redirectTo: 'listar',
         pathMatch: 'full',
       },
-      { 
-        path: 'crear', 
-        component: PlansuscripcionCrear 
+      {
+        path: 'crear',
+        component: PlansuscripcionCrear,
       },
-      { path: 'actualizar/:id', 
-        component: PlansuscripcionActualizar 
-      },
-      { 
-        path: 'listar', 
-        component: PlansuscripcionList 
+      { path: 'actualizar/:id', component: PlansuscripcionActualizar },
+      {
+        path: 'listar',
+        component: PlansuscripcionList,
       },
       {
         path: 'detalle/:id',
         component: PlansuscripcionDetalle
       }
     ],
-  },  
+  },
 ];
