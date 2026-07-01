@@ -7,6 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { Suscripcion } from '../../../models/suscripcion';
 import { Suscripcionservice } from '../../../services/suscripcionservice';
@@ -23,6 +26,9 @@ import { Suscripcionservice } from '../../../services/suscripcionservice';
     MatSnackBarModule,
     RouterModule,
     MatSelectModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './suscripcion-list.html',
   styleUrl: './suscripcion-list.css',
@@ -36,6 +42,10 @@ export class SuscripcionList implements OnInit {
     { value: 'activo', viewValue: 'Activo' },
     { value: 'inactivo', viewValue: 'Inactivo' },
   ];
+
+  fechaInicioFiltro: Date | null = null;
+  fechaFinFiltro: Date | null = null;
+  estadoSeleccionado: string = '';
 
   @ViewChild(MatPaginator) faPaginator!: MatPaginator;
 
@@ -58,6 +68,7 @@ export class SuscripcionList implements OnInit {
       next: (data) => {
         this.faDataSource.data = data;
         this.faDataSource.paginator = this.faPaginator;
+        this.faAplicarFiltroEstado();
       },
       error: (err) => {
         console.error('Error al listar suscripciones:', err);
@@ -68,12 +79,81 @@ export class SuscripcionList implements OnInit {
     });
   }
 
+  faCapturarFechaInicio(event: any): void {
+    this.fechaInicioFiltro = event.value;
+  }
+
+  faCapturarFechaFin(event: any): void {
+    this.fechaFinFiltro = event.value;
+  }
+
+  faFormatearFecha(fecha: Date): string {
+    const anio = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    return `${anio}-${mes}-${dia}`;
+  }
+
   faFiltrarEstado(valor: string): void {
-    this.faDataSource.filter = valor.trim().toLowerCase();
+    this.estadoSeleccionado = valor;
+    this.faAplicarFiltroEstado();
+  }
+
+  faAplicarFiltroEstado(): void {
+    this.faDataSource.filter = this.estadoSeleccionado.trim().toLowerCase();
 
     if (this.faDataSource.paginator) {
       this.faDataSource.paginator.firstPage();
     }
+  }
+
+  faFiltrarPorFechas(): void {
+    if (!this.fechaInicioFiltro || !this.fechaFinFiltro) {
+      this.snackBar.open('Debe seleccionar ambas fechas para filtrar', 'Cerrar', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    if (this.fechaInicioFiltro > this.fechaFinFiltro) {
+      this.snackBar.open(
+        'La fecha de inicio no puede ser mayor que la fecha fin',
+        'Cerrar',
+        {
+          duration: 3000,
+        }
+      );
+      return;
+    }
+
+    const fechaInicio = this.faFormatearFecha(this.fechaInicioFiltro);
+    const fechaFin = this.faFormatearFecha(this.fechaFinFiltro);
+
+    this.sS.filtrarPorFechas(fechaInicio, fechaFin).subscribe({
+      next: (data) => {
+        this.faDataSource.data = data;
+        this.faDataSource.paginator = this.faPaginator;
+        this.faAplicarFiltroEstado();
+
+        if (data.length === 0) {
+          this.snackBar.open('No se encontraron suscripciones en ese rango', 'Cerrar', {
+            duration: 3000,
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error al filtrar por fechas:', err);
+        this.snackBar.open('Error al filtrar suscripciones por fechas', 'Cerrar', {
+          duration: 3000,
+        });
+      },
+    });
+  }
+
+  faLimpiarFiltrosFechas(): void {
+    this.fechaInicioFiltro = null;
+    this.fechaFinFiltro = null;
+    this.faCargarDatos();
   }
 
   faEliminar(id: number): void {

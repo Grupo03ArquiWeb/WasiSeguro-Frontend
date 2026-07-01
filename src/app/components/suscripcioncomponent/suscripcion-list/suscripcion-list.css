@@ -1,13 +1,17 @@
-table {
-  width: 100%;
+.filtros-fecha-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
 }
 
-th.mat-mdc-header-cell {
-  text-align: left;
-  font-weight: bold;
-  color: #51a0ad;
+.filtros-fecha-row mat-form-field {
+  min-width: 220px;
+  flex: 1 1 220px;
 }
 
-mat-form-field {
-  margin-bottom: 15px;
+.filtros-fecha-row button {
+  height: 56px;
+  white-space: nowrap;
 }

@@ -1,0 +1,12 @@
+.detalle-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.detalle-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+  border-radius: 16px;
+}
