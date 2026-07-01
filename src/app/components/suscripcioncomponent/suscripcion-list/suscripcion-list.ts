@@ -13,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { Suscripcion } from '../../../models/suscripcion';
 import { Suscripcionservice } from '../../../services/suscripcionservice';
+import { AuthService } from '../../../services/authService';
 
 @Component({
   selector: 'app-suscripcion-list',
@@ -51,7 +52,8 @@ export class SuscripcionList implements OnInit {
 
   constructor(
     private sS: Suscripcionservice,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +63,10 @@ export class SuscripcionList implements OnInit {
       const estado = data.estado ? data.estado.toLowerCase() : '';
       return filter === '' ? true : estado === filter;
     };
+  }
+
+  isAdmin(): boolean {
+    return this.authService.showRole() === 'ROLE_ADMIN';
   }
 
   faCargarDatos(): void {
@@ -157,6 +163,13 @@ export class SuscripcionList implements OnInit {
   }
 
   faEliminar(id: number): void {
+    if (!this.isAdmin()) {
+      this.snackBar.open('No tiene permisos para eliminar', 'Cerrar', {
+        duration: 3000,
+      });
+      return;
+    }
+
     const confirmacion = confirm('¿Está seguro de eliminar esta suscripción?');
 
     if (!confirmacion) {

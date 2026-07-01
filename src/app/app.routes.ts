@@ -100,6 +100,7 @@ export const routes: Routes = [
     path: 'suscripcion',
     canActivate: [authGuard],
     component: Suscripcioncomponent,
+    data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
     children: [
       {
         path: '',
@@ -109,30 +110,32 @@ export const routes: Routes = [
       {
         path: 'crear',
         component: SuscripcionCrear,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN'] },
       },
       {
         path: 'listar',
         component: SuscripcionList,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
       },
       {
         path: 'actualizar/:id',
         component: SuscripcionActualizar,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
       },
       {
         path: 'detalle/:id',
         component: SuscripcionDetalle,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
       },
       {
         path: 'reportes',
         component: SuscripcionReportes,
-      },
-      {
-        path: 'actualizar/:id',
-        component: SuscripcionActualizar,
-      },
-      {
-        path: 'detalle/:id',
-        component: SuscripcionDetalle,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
       },
     ],
   },
@@ -140,6 +143,7 @@ export const routes: Routes = [
     path: 'plansuscripcion',
     canActivate: [authGuard],
     component: Plansuscripcioncomponent,
+    data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
     children: [
       {
         path: '',
@@ -149,16 +153,27 @@ export const routes: Routes = [
       {
         path: 'crear',
         component: PlansuscripcionCrear,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN'] },
       },
-      { path: 'actualizar/:id', component: PlansuscripcionActualizar },
+      {
+        path: 'actualizar/:id',
+        component: PlansuscripcionActualizar,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
+      },
       {
         path: 'listar',
         component: PlansuscripcionList,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
       },
       {
         path: 'detalle/:id',
-        component: PlansuscripcionDetalle
-      }
+        component: PlansuscripcionDetalle,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
+      },
     ],
   },
 ];
