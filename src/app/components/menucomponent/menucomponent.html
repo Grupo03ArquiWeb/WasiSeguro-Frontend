@@ -34,7 +34,7 @@
       }
 
       <!-- menú de suscripción -->
-      @if (isAdmin()) {
+      @if (isAdmin() || isMod()) {
       <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuSuscripcion">
         <mat-icon>assignment</mat-icon>Suscripciones
       </button>
@@ -42,7 +42,7 @@
       <!-- menú de suscripción -->
 
       <!-- menú de plan suscripción -->
-      @if (isAdmin()) {
+      @if (isAdmin() || isMod()) {
       <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuPlan">
         <mat-icon>workspace_premium</mat-icon>Planes
       </button>
@@ -90,27 +90,39 @@
 
 <!-- menú de suscripción -->
 <mat-menu #menuSuscripcion="matMenu">
+  @if (isAdmin()) {
   <button mat-menu-item routerLink="/suscripcion/crear">
     <mat-icon>add_circle_outline</mat-icon>Registrar suscripción
   </button>
+  }
 
+  @if (isAdmin() || isMod()) {
   <button mat-menu-item routerLink="/suscripcion/listar">
     <mat-icon>list_alt</mat-icon>Listar suscripciones
   </button>
+  }
 
+  @if (isAdmin() || isMod()) {
   <button mat-menu-item routerLink="/suscripcion/reportes">
     <mat-icon>bar_chart</mat-icon>Reportes
   </button>
+  }
 </mat-menu>
 <!-- menú de suscripción -->
+
 <!-- menú de plan suscripción -->
 <mat-menu #menuPlan="matMenu">
+  @if (isAdmin()) {
   <button mat-menu-item routerLink="/plansuscripcion/crear">
     <mat-icon>add_circle_outline</mat-icon>Registrar plan
   </button>
+  }
+
+  @if (isAdmin() || isMod()) {
   <button mat-menu-item routerLink="/plansuscripcion/listar">
     <mat-icon>list</mat-icon>Listar planes
   </button>
+  }
 </mat-menu>
 <!-- menú de plan suscripción -->
 }

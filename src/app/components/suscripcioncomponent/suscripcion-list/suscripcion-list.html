@@ -91,9 +91,11 @@
             <mat-icon>edit</mat-icon>
           </button>
 
+          @if (isAdmin()) {
           <button mat-icon-button color="warn" (click)="faEliminar(element.id)">
             <mat-icon>delete</mat-icon>
           </button>
+          }
         </td>
       </ng-container>
 

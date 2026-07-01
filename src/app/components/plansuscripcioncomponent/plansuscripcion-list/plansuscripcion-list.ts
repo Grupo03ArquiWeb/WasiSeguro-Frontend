@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { PlanSuscripcion } from '../../../models/planSuscripcion';
 import { PlanSuscripcionservice } from '../../../services/planSuscripcionservice';
+import { AuthService } from '../../../services/authService';
 
 @Component({
   selector: 'app-plansuscripcion-list',
@@ -49,7 +50,8 @@ export class PlansuscripcionList implements OnInit {
 
   constructor(
     private pS: PlanSuscripcionservice,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +61,10 @@ export class PlansuscripcionList implements OnInit {
       if (filter === '') return true;
       return String(data.activo) === filter;
     };
+  }
+
+  isAdmin(): boolean {
+    return this.authService.showRole() === 'ROLE_ADMIN';
   }
 
   cargarDatos(): void {
@@ -85,6 +91,13 @@ export class PlansuscripcionList implements OnInit {
   }
 
   eliminar(id: number): void {
+    if (!this.isAdmin()) {
+      this.snackBar.open('No tiene permisos para eliminar', 'Cerrar', {
+        duration: 3000,
+      });
+      return;
+    }
+
     const confirmacion = confirm('¿Está seguro de eliminar este plan?');
 
     if (!confirmacion) {
