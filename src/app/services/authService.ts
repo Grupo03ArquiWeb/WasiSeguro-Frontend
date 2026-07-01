@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-
 import { baseUrl } from './baseUrl';
 import { LoginRequest } from '../models/login-request';
-import { LoginResponse } from '../models/login-response';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -12,31 +11,43 @@ import { LoginResponse } from '../models/login-response';
 export class AuthService {
   private url = `${baseUrl}/login`;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object,
+  ) {}
 
-  login(data: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.url, data).pipe(
-      tap((response) => {
-        localStorage.setItem('token', response.jwttoken);
-      }),
-    );
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
+  login(request: LoginRequest) {
+    return this.http.post(this.url, request);
+  }
+  verificar(): boolean {
+    if (!this.isBrowser()) {
+      return false;
+    }
+    const token = localStorage.getItem('token');
+    return token != null;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  showRole(): string | null {
+    if (!this.isBrowser()) {
+      return null;
+    }
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    return decodedToken.roles;
   }
-
   logout() {
     localStorage.removeItem('token');
   }
 
-  isLogged(): boolean {
-    return !!this.getToken();
-  }
-
-
-//facebook api
-loginConFacebookBackend(token: string) {
+  //facebook api
+  loginConFacebookBackend(token: string) {
     // Escribimos la URL base directamente para evitar que se mezcle con /login
     return this.http.post<any>('http://localhost:8080/facebook', { token: token });
   }

@@ -1,3 +1,8 @@
+.btn-logout{
+  background-color: #dd3737 !important;
+
+}
+
 mat-toolbar.ws-toolbar {
   --mat-toolbar-container-background-color: #3db8bf;
   background-color: #3db8bf !important;

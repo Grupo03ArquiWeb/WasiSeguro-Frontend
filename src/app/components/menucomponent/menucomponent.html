@@ -1,70 +1,94 @@
+@if (verificar()) {
 <mat-toolbar class="ws-toolbar">
+  <div class="flex justify-between items-center w-full">
+    <div class="flex items-center">
+      <a class="ws-brand" routerLink="/home">
+        <div class="ws-brand-icon">
+          <mat-icon class="text-white text-lg">shield</mat-icon>
+        </div>
+        Wasiseguro
+      </a>
 
-  <a class="ws-brand" routerLink="/home">
-    <div class="ws-brand-icon">
-      <mat-icon class="text-white text-lg">shield</mat-icon>
+      @if (isAdmin() || isMod() || isUser()) {
+      <button matButton class="ws-nav-btn" routerLink="/home">
+        <mat-icon>home</mat-icon>Inicio
+      </button>
+
+      }
+      @if (isAdmin()) {
+      <button matButton class="ws-nav-btn" routerLink="/mapa">
+        <mat-icon>map</mat-icon>Mapa
+      </button>
+      }
+      <!-- menú de usuario -->
+      @if (isAdmin() || isMod() || isUser()) {
+      <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuUsuario">
+        <mat-icon> person</mat-icon>Usuarios
+      </button>
+      }
+      <!-- menú de roles -->
+      @if (isAdmin() || isMod()) {
+      <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuRol">
+        <mat-icon>security</mat-icon>Roles
+      </button>
+      }
+
+      <!-- menú de suscripción -->
+      @if (isAdmin()) {
+      <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuSuscripcion">
+        <mat-icon>assignment</mat-icon>Suscripciones
+      </button>
+      }
+      <!-- menú de suscripción -->
+
+      <!-- menú de plan suscripción -->
+      @if (isAdmin()) {
+      <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuPlan">
+        <mat-icon>workspace_premium</mat-icon>Planes
+      </button>
+      }
+      <!-- menú de plan suscripción -->
+
+      <span class="ws-spacer"></span>
+
     </div>
-    Wasiseguro
-  </a>
-
-  <button matButton class="ws-nav-btn" routerLink="/home">
-    <mat-icon>home</mat-icon>Inicio
-  </button>
-
-
-  <button matButton class="ws-nav-btn" routerLink="/mapa">
-    <mat-icon>map</mat-icon>Mapa
-  </button>
-<!--=======-->
-  <!-- menú de usuario -->
-   <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuUsuario">
-    <mat-icon> person</mat-icon>Usuarios
-  </button>
-   <!-- menú de usuario -->
-
-  <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuRol">
-    <mat-icon>security</mat-icon>Roles
-  </button>
-
-  <!-- menú de suscripción -->
-  <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuSuscripcion">
-    <mat-icon>assignment</mat-icon>Suscripciones
-  </button>
-  <!-- menú de suscripción -->
-   
-  <!-- menú de plan suscripción -->
-  <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuPlan">
-    <mat-icon>workspace_premium</mat-icon>Planes
-  </button>
-  <!-- menú de plan suscripción -->
-
-  <span class="ws-spacer"></span>
-
-
+    <div class="flex items-center">
+      <button matButton class="ws-nav-btn btn-logout" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>Salir
+      </button>
+    </div>
+  </div>
 </mat-toolbar>
 
-  <!-- menú de usuario -->
+<!-- menú de usuario -->
 <mat-menu #menuUsuario="matMenu">
+  @if (isAdmin() || isMod() || isUser()) {
   <button mat-menu-item routerLink="/usuario/crear">
     <mat-icon>add_circle_outline</mat-icon>Registrar usuario
   </button>
-
+  }
+  @if (isAdmin() || isMod()) {
   <button mat-menu-item routerLink="/usuario/listar">
     <mat-icon>list_alt</mat-icon>Listar usuarios
   </button>
+  }
 </mat-menu>
-  <!-- menú de usuario -->
+<!-- menú de usuario -->
 
 <mat-menu #menuRol="matMenu">
+  @if (isAdmin()) {
   <button mat-menu-item routerLink="/roles/crear">
     <mat-icon>add_circle_outline</mat-icon>Registrar rol
   </button>
+}
+@if (isAdmin() || isMod()) {
   <button mat-menu-item routerLink="/roles/listar">
     <mat-icon>list</mat-icon>Listar roles
   </button>
+}
 </mat-menu>
 
-  <!-- menú de suscripción -->
+<!-- menú de suscripción -->
 <mat-menu #menuSuscripcion="matMenu">
   <button mat-menu-item routerLink="/suscripcion/crear">
     <mat-icon>add_circle_outline</mat-icon>Registrar suscripción
@@ -75,11 +99,11 @@
   </button>
 
   <button mat-menu-item routerLink="/suscripcion/reportes">
-  <mat-icon>bar_chart</mat-icon>Reportes
+    <mat-icon>bar_chart</mat-icon>Reportes
   </button>
 </mat-menu>
-  <!-- menú de suscripción -->
-  <!-- menú de plan suscripción -->
+<!-- menú de suscripción -->
+<!-- menú de plan suscripción -->
 <mat-menu #menuPlan="matMenu">
   <button mat-menu-item routerLink="/plansuscripcion/crear">
     <mat-icon>add_circle_outline</mat-icon>Registrar plan
@@ -88,4 +112,5 @@
     <mat-icon>list</mat-icon>Listar planes
   </button>
 </mat-menu>
-  <!-- menú de plan suscripción -->
+<!-- menú de plan suscripción -->
+}
