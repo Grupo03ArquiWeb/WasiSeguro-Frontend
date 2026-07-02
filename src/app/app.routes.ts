@@ -25,6 +25,8 @@ import { PlansuscripcionCrear } from './components/plansuscripcioncomponent/plan
 import { PlansuscripcionDetalle } from './components/plansuscripcioncomponent/plansuscripcion-detalle/plansuscripcion-detalle';
 import { PlansuscripcionActualizar } from './components/plansuscripcioncomponent/plansuscripcion-actualizar/plansuscripcion-actualizar';
 import { PlansuscripcionList } from './components/plansuscripcioncomponent/plansuscripcion-list/plansuscripcion-list';
+import { UsuarioReportes } from './components/usuariocomponent/usuario-reportes/usuario-reportes';
+import { RolReportes } from './components/rolcomponent/rol-reportes/rol-reportes';
 
 export const routes: Routes = [
   {
@@ -63,6 +65,11 @@ export const routes: Routes = [
         data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
       },
       { path: 'listar', component: UsuarioList, data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] } },
+      {
+        path: 'reportes',
+        component: UsuarioReportes,
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
+      },
     ],
   },
   {
@@ -86,6 +93,11 @@ export const routes: Routes = [
         data: { roles: ['ROLE_ADMIN'] },
       },
       { path: 'listar', component: RolList, data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] } },
+       {
+        path: 'reportes',
+        component: RolReportes,
+        data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
+      },
     ],
   },
   {

@@ -1,0 +1,55 @@
+<div class="chart-container">
+  <h2 class="chart-title">Reporte de usuarios por estado</h2>
+
+  <div class="chart-wrapper">
+    @if (hasDataEstado) {
+      <div class="chart-wrapper chart-pie">
+        <canvas
+          #chartEstado
+          baseChart
+          [datasets]="barChartDataEstado"
+          [labels]="barChartLabelsEstado"
+          [options]="barChartOptionsEstado"
+          [legend]="barChartLegendEstado"
+          [type]="barChartTypeEstado"
+        >
+        </canvas>
+      </div>
+    }
+
+    @if (!hasDataEstado) {
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="chart-container">
+  <h2 class="chart-title">Reporte de usuarios por idioma</h2>
+
+  <div class="chart-wrapper">
+    @if (hasDataIdioma) {
+      <div class="chart-wrapper chart-bar">
+        <canvas
+          #chartIdioma
+          baseChart
+          [datasets]="barChartDataIdioma"
+          [labels]="barChartLabelsIdioma"
+          [options]="barChartOptionsIdioma"
+          [legend]="barChartLegendIdioma"
+          [type]="barChartTypeIdioma"
+        >
+        </canvas>
+      </div>
+    }
+
+    @if (!hasDataIdioma) {
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </div>
+</div>

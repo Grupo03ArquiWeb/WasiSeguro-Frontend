@@ -1,0 +1,27 @@
+<div class="chart-container">
+  <h2 class="chart-title">Reporte de usuarios activos por rol</h2>
+
+  <div class="chart-wrapper">
+    @if (hasDataRol) {
+      <div class="chart-wrapper chart-bar">
+        <canvas
+          #chartRol
+          baseChart
+          [datasets]="barChartDataRol"
+          [labels]="barChartLabelsRol"
+          [options]="barChartOptionsRol"
+          [legend]="barChartLegendRol"
+          [type]="barChartTypeRol"
+        >
+        </canvas>
+      </div>
+    }
+
+    @if (!hasDataRol) {
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </div>
+</div>

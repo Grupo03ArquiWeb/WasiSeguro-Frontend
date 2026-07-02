@@ -27,7 +27,7 @@
       </button>
       }
       <!-- menú de roles -->
-      @if (isAdmin() || isMod()) {
+      @if (isAdmin()) {
       <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuRol">
         <mat-icon>security</mat-icon>Roles
       </button>
@@ -72,6 +72,11 @@
     <mat-icon>list_alt</mat-icon>Listar usuarios
   </button>
   }
+  @if (isAdmin() || isMod()) {
+    <button mat-menu-item routerLink="/usuario/reportes">
+    <mat-icon>bar_chart</mat-icon>Reportes
+  </button>
+}
 </mat-menu>
 <!-- menú de usuario -->
 
@@ -81,9 +86,15 @@
     <mat-icon>add_circle_outline</mat-icon>Registrar rol
   </button>
 }
-@if (isAdmin() || isMod()) {
+@if (isAdmin()) {
   <button mat-menu-item routerLink="/roles/listar">
     <mat-icon>list</mat-icon>Listar roles
+  </button>
+  
+}
+@if (isAdmin()) {
+  <button mat-menu-item routerLink="/roles/reportes">
+    <mat-icon>bar_chart</mat-icon>Reportes
   </button>
 }
 </mat-menu>
