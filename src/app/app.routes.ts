@@ -28,6 +28,11 @@ import { PlansuscripcionList } from './components/plansuscripcioncomponent/plans
 import { UsuarioReportes } from './components/usuariocomponent/usuario-reportes/usuario-reportes';
 import { RolReportes } from './components/rolcomponent/rol-reportes/rol-reportes';
 
+//imports tipo incidente
+import { TipoIncidenteListar } from './components/tipo-incidentecomponent/tipo-incidente-listar/tipo-incidente-listar';
+import { TipoIncidenteCrear } from './components/tipo-incidentecomponent/tipo-incidente-crear/tipo-incidente-crear';
+import { TipoIncidenteActualizar } from './components/tipo-incidentecomponent/tipo-incidente-actualizar/tipo-incidente-actualizar';
+
 export const routes: Routes = [
   {
     path: '',
@@ -188,4 +193,20 @@ export const routes: Routes = [
       },
     ],
   },
+{
+    path: 'tipos-incidente',
+    canActivate: [authGuard], 
+    component: Rolcomponent, 
+    data: { roles: ['ROLE_ADMIN', 'ROLE_MODERADOR'] },
+    children: [
+      {
+        path: '',
+        redirectTo: 'listar',
+        pathMatch: 'full',
+      },
+      { path: 'listar', component: TipoIncidenteListar },
+      { path: 'crear', component: TipoIncidenteCrear },
+      { path: 'actualizar/:id', component: TipoIncidenteActualizar }
+    ]
+  }
 ];

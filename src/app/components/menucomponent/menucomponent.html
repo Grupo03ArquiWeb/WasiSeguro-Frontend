@@ -22,10 +22,17 @@
       }
       <!-- menú de usuario -->
       @if (isAdmin() || isMod() || isUser()) {
-      <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuUsuario">
+      <butnpmton matButton class="ws-nav-btn" [matMenuTriggerFor]="menuUsuario">
         <mat-icon> person</mat-icon>Usuarios
+      </butnpmton>
+      }
+       <!-- menú de incidentes -->
+      @if (isAdmin() || isMod()) {
+      <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuIncidente">
+        <mat-icon>warning</mat-icon>Incidentes
       </button>
       }
+
       <!-- menú de roles -->
       @if (isAdmin()) {
       <button matButton class="ws-nav-btn" [matMenuTriggerFor]="menuRol">
@@ -79,6 +86,19 @@
 }
 </mat-menu>
 <!-- menú de usuario -->
+ 
+<mat-menu #menuIncidente="matMenu">
+  @if (isAdmin()) {
+  <button mat-menu-item routerLink="/tipos-incidente/crear">
+    <mat-icon>add_circle_outline</mat-icon>Registrar Tipo
+  </button>
+  }
+  @if (isAdmin() || isMod()) {
+  <button mat-menu-item routerLink="/tipos-incidente/listar">
+    <mat-icon>list_alt</mat-icon>Listar Tipos
+  </button>
+  }
+</mat-menu>
 
 <mat-menu #menuRol="matMenu">
   @if (isAdmin()) {
@@ -98,6 +118,7 @@
   </button>
 }
 </mat-menu>
+
 
 <!-- menú de suscripción -->
 <mat-menu #menuSuscripcion="matMenu">
