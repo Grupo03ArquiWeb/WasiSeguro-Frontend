@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { baseUrl } from './baseUrl';
 import { Usuario } from '../models/usuario';
 import { UsuarioCreate } from '../models/usuarioCreateDTO';
+import { UsuarioEstadisticaEstado } from '../models/UsuarioEstadisticaEstado';
+import { UsuarioEstadisticaIdioma } from '../models/UsuarioEstadisticaIdioma';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +27,13 @@ export class Usuarioservice {
   }
   delete(id: string) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
+  estadisticasPorEstado() {
+    return this.http.get<UsuarioEstadisticaEstado[]>(`${this.url}/estadisticas/estado`);
+  }
+
+  estadisticasPorIdioma() {
+    return this.http.get<UsuarioEstadisticaIdioma[]>(`${this.url}/estadisticas/idioma`);
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Rol } from '../models/Rol';
 import { baseUrl } from './baseUrl';
+import { RolEstadisticaUsuarios } from '../models/rolEstadisticaUsuarios';
 
 @Injectable({
   providedIn: 'root',
@@ -25,4 +26,7 @@ export class Rolservice {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+  estadisticasPorRol() {
+  return this.http.get<RolEstadisticaUsuarios[]>(`${this.url}/usuariosporol`);
+}
 }
