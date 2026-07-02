@@ -1,0 +1,32 @@
+<div class="w-full max-w-2xl mx-auto px-6 py-8">
+  <div class="mb-6">
+    <h2 class="text-2xl font-semibold text-accent m-0">Actualizar Tipo de Incidente</h2>
+    <p class="text-sm text-muted m-0">Edita la información del incidente seleccionado.</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="actualizar()" class="bg-white border border-border rounded-xl shadow-sm p-6 space-y-4">
+    
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" rows="3"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="activo">
+        <mat-option [value]="true">Activo</mat-option>
+        <mat-option [value]="false">Inactivo</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="flex justify-center gap-4 mt-6">
+      <button mat-raised-button color="primary" type="submit" class="px-8">Guardar Cambios</button>
+      <button mat-stroked-button color="warn" type="button" (click)="cancelar()" class="px-8">Cancelar</button>
+    </div>
+  </form>
+</div>

@@ -1,12 +1,32 @@
-<div class="map-wrapper">
-  <div id="map"></div>
+<app-menucomponent></app-menucomponent>
 
-  <div class="legend-overlay">
-    <h4>Referencia</h4>
-    <div class="legend-item">
-      <span class="dot red-dot"></span> Incidentes registrados
+<div class="w-full max-w-5xl mx-auto px-6 py-8 flex flex-col gap-6">
+  
+  <div class="flex items-center justify-between bg-white border border-border rounded-xl p-4 shadow-xs">
+    <div class="flex items-center gap-4">
+      <a routerLink="/home" class="w-10 h-10 rounded-lg bg-secondary-light flex items-center justify-center hover:bg-secondary/20 transition-all text-secondary">
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+      <div>
+        <h2 class="m-0 text-lg font-semibold text-accent flex items-center gap-2">
+          Monitoreo de Incidentes en Tiempo Real
+        </h2>
+        <p class="m-0 text-xs text-muted">Visualización geográfica de reportes ciudadanos</p>
+      </div>
     </div>
-    <hr>
-    <small>WasiSeguro V1.0</small>
   </div>
+
+  <div class="map-wrapper bg-white border border-border rounded-2xl overflow-hidden shadow-sm relative">
+    <div id="map"></div>
+
+    <div class="legend-overlay">
+      <h4 class="m-0 text-xs font-semibold uppercase tracking-wider text-accent mb-2">Referencia</h4>
+      <div class="legend-item text-xs text-accent">
+        <span class="dot red-dot"></span> Incidentes registrados
+      </div>
+      <hr class="my-2 border-gray-100">
+      <small class="text-muted block text-right">WasiSeguro V1.0</small>
+    </div>
+  </div>
+
 </div>

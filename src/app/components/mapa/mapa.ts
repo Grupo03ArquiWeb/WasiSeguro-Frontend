@@ -1,9 +1,14 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import { IncidenteService } from '../../services/incidente';
+import { Menucomponent } from '../menucomponent/menucomponent';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mapa',
+  standalone: true, 
+  imports: [Menucomponent, MatIconModule, RouterLink], 
   templateUrl: './mapa.html',
   styleUrls: ['./mapa.css']
 })
@@ -19,6 +24,7 @@ export class MapaComponent implements AfterViewInit {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(this.map);
 
+  
     const customIcon = L.icon({
       iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -30,6 +36,7 @@ export class MapaComponent implements AfterViewInit {
 
     const markerGroup = L.featureGroup();
 
+    // Consumo del servicio backend protegido
     this.incidenteService.listarIncidentes().subscribe({
       next: (data: any[]) => {
         if (Array.isArray(data)) {
@@ -37,7 +44,12 @@ export class MapaComponent implements AfterViewInit {
             if (item.latitud && item.longitud) {
               const marker = L.marker([item.latitud, item.longitud], { icon: customIcon })
                 .addTo(this.map)
-                .bindPopup(`<b>Incidente:</b> ${item.descripcion}`);
+                .bindPopup(`
+                  <div style="font-family: sans-serif; padding: 2px;">
+                    <strong style="color: #1a3a3c;">Incidente Reportado</strong><br/>
+                    <span style="font-size: 13px; color: #4a5568;">${item.descripcion}</span>
+                  </div>
+                `);
               
               markerGroup.addLayer(marker);
             }
@@ -47,7 +59,7 @@ export class MapaComponent implements AfterViewInit {
           }
         }
       },
-      error: (err) => console.error("Error:", err)
+      error: (err) => console.error("Error al cargar incidentes en el mapa:", err)
     });
 
     setTimeout(() => { this.map.invalidateSize(); }, 500);
